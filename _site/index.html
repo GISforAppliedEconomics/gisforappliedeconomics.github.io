@@ -70,7 +70,7 @@
 
 <p>Before starting, I would like you to ask you installing these tree programs: QGIS, RStudio (R) and some Python packages. We will need them during the course.</p>
 
-<h1>Installing QGIS</h1>
+<h1 id="installing-qgis">Installing QGIS</h1>
 
 <p>QGIS will be the GIS Desktop tool that will be use during the course. It is a free and open source software. It is a very cool project that brings all the power of GIS analysis for everybody. We will discuss its pro and cons over other GIS Desktop tools (e.g. ArcGIS, GRASS, among others)</p>
 
@@ -80,56 +80,60 @@
 
 <p>Note, that you need to install some required packages before installing QGIS. Everything it is very well explained at the readme file.</p>
 
-<h3>For the impatient</h3>
-
+<h3 id="for-the-impatient">For the impatient</h3>
 <ul>
-<li>If you would like to start exploring QGIS, have a look to this manual
+  <li>If you would like to start exploring QGIS, have a look to this manual
 <a href="http://docs.qgis.org/2.14/en/docs/gentle_gis_introduction/">Nice Introduction</a></li>
 </ul>
 
-<h2>Installing python packages</h2>
+<h2 id="installing-python-packages">Installing python packages</h2>
 
-<p>Most of the available GIS solutions are python-based. Softwares such as ArcGIS and QGIS offer a wide range of pre-defined python syntaxis/functions to perform the most common task for GIS analysis. As we will discuss, these pre-defined functions face some restrictions that may impose an important loss of performance in your analysis. In particular, when you start running complex analysis that require more calculation power (e.g. multiprocessing, cluster based computer, among others). </p>
+<p>Most of the available GIS solutions are python-based. Softwares such as ArcGIS and QGIS offer a wide range of pre-defined python syntaxis/functions to perform the most common task for GIS analysis. As we will discuss, these pre-defined functions face some restrictions that may impose an important loss of performance in your analysis. In particular, when you start running complex analysis that require more calculation power (e.g. multiprocessing, cluster based computer, among others).</p>
 
 <p>This is why we should be able to program a standalone solutions that allow to integrate GIS tools for a more complex analysis in high-perform environments. We will use the following python packages:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">* Pandas (A basic knowledge of this package will be assumed)
+
+<div class="highlighter-rouge"><pre class="highlight"><code>* Pandas (A basic knowledge of this package will be assumed)
 * GDAL
 * Fiona
 * rtree
 * shapely (it is usually pre-installed)
 * matplotlib
-</code></pre></div>
-<h3>Installing packages for Python</h3>
+</code></pre>
+</div>
 
+<h3 id="installing-packages-for-python">Installing packages for Python</h3>
 <ul>
-<li><p>If you are windows-users, I suggest to install the conda. It is a package and  environment manager for Python (and others languages like C).</p>
-
-<ul>
-<li>The complete version is called Anacoda <a href="https://docs.continuum.io/anaconda/">Anaconda</a></li>
-<li>A small version is called  <a href="http://conda.pydata.org/miniconda.html">Miniconda</a>. One installed, you can install everyhing using the basic command
+  <li>If you are windows-users, I suggest to install the conda. It is a package and  environment manager for Python (and others languages like C).
+    <ul>
+      <li>The complete version is called Anacoda <a href="https://docs.continuum.io/anaconda/">Anaconda</a></li>
+      <li>A small version is called  <a href="http://conda.pydata.org/miniconda.html">Miniconda</a>. One installed, you can install everyhing using the basic command
 Once you have installed you can install any python package just typing this
-<code>
-conda install [package name]
-</code>
-Or using the graphical environment provided by <a href="https://docs.continuum.io/anaconda/">Anaconda</a></li>
-</ul></li>
-<li><p>For mac-users, I suggest to work with the pre-installed python distributor. So, don&#39;t install anything. Just make sure you have the dependency manager called &quot;pip&quot;. Look here the instruction to install ot <a href="https://pip.pypa.io/en/stable/quickstart/">pip</a>. As Anaconda, once install you can install any package using </p></li>
-</ul>
-<div class="highlight"><pre><code class="language-" data-lang="">conda install [package name]
-</code></pre></div>
-<ul>
-<li>You can also install the packages manually. Just go to a python repository (e.g. <a href="https://pypi.python.org/pypi">this</a>) and following the instruction from each package.</li>
+        <div class="highlighter-rouge"><pre class="highlight"><code>conda install [package name]
+</code></pre>
+        </div>
+        <p>Or using the graphical environment provided by <a href="https://docs.continuum.io/anaconda/">Anaconda</a></p>
+      </li>
+    </ul>
+  </li>
+  <li>For mac-users, I suggest to work with the pre-installed python distributor. So, don’t install anything. Just make sure you have the dependency manager called “pip”. Look here the instruction to install ot <a href="https://pip.pypa.io/en/stable/quickstart/">pip</a>. As Anaconda, once install you can install any package using</li>
 </ul>
 
-<h2>Installing R and R-Studio</h2>
+<div class="highlighter-rouge"><pre class="highlight"><code>conda install [package name]
+</code></pre>
+</div>
+<ul>
+  <li>You can also install the packages manually. Just go to a python repository (e.g. <a href="https://pypi.python.org/pypi">this</a>) and following the instruction from each package.</li>
+</ul>
+
+<h2 id="installing-r-and-r-studio">Installing R and R-Studio</h2>
 
 <p>You probably already had this, yet I would just like to make sure that it is your computer. During the last lecture, we will introduce two packages in R to analyze GIS.</p>
 
-<h2>Other resources</h2>
-
+<h2 id="other-resources">Other resources</h2>
 <ul>
-<li>Replication codes and problems sets will be distributed via <a href="https://github.com">Github</a>. If you are not familiar with this control version environment, it may be a nice opportunity to start using it. Go install it and don&#39;t hesitate to comment or improve the codes from the course.</li>
+  <li>Replication codes and problems sets will be distributed via <a href="https://github.com">Github</a>. If you are not familiar with this control version environment, it may be a nice opportunity to start using it. Go install it and don’t hesitate to comment or improve the codes from the course.</li>
 </ul>
+
 
   </div>
   <div class="colophon">
