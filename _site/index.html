@@ -30,6 +30,13 @@
           <ul class="posts-list">
             
               <li class="post-link">
+                <a class="post-title" href="/posts/2016/11/10/lecture1.html">
+                  <span class="post-date">10 Nov 2016</span>
+                  Lecture 1
+                </a>
+              </li>
+            
+              <li class="post-link">
                 <a class="post-title" href="/posts/2016/11/06/welcome.html">
                   <span class="post-date">06 Nov 2016</span>
                   Welcome and Basic Requirements
@@ -58,87 +65,52 @@
       <img id="cover-photo" src="/images/cover.jpg" style='height: 100%; width: 100%; object-fit: contain'> 
     </div> -->
     <div id="info-container">
-      <h1 id="title">Welcome and Basic Requirements</h1>
-      <span id="date">06 Nov 2016</span>
+      <h1 id="title">Lecture 1</h1>
+      <span id="date">10 Nov 2016</span>
     </div>
   </div>
 
   <div class="post">
-    <p>Welcome the course on GIS for Applied Economics. The aim of the course is to provide you with a basic knowledge to master the spatial data analysis toolbox. It offers alternative solutions to a broad range of empirical problems of applied economics.</p>
+    <p>Remember that the course will take place at 23.S01</p>
 
-<p>In this website, you will find slides and additional materials to encourage you to go  further include GIS tools in your research.</p>
+<h2 id="general-idea">General Idea</h2>
 
-<p>Before starting, I would like you to ask you installing these tree programs: QGIS, RStudio (R) and some Python packages. We will need them during the course.</p>
+<p>In this lecture we will introduce the basic concepts for the GIS analysis and we will make our very first approach to QGIS and Fiona.</p>
 
-<h1 id="installing-qgis">Installing QGIS</h1>
+<h2 id="slides">Slides</h2>
 
-<p>QGIS will be the GIS Desktop tool that will be use during the course. It is a free and open source software. It is a very cool project that brings all the power of GIS analysis for everybody. We will discuss its pro and cons over other GIS Desktop tools (e.g. ArcGIS, GRASS, among others)</p>
+<p><a href="">Slides Session 1</a></p>
 
-<p>So, the first step will be to install QGIS in your laptop. This software is available for Windows, Mac OS X, Linux and Android. In all platforms, the environment is quite similar.</p>
+<h2 id="geo-data-base-examples">Geo-Data Base Examples</h2>
 
-<p><a href="https://www.qgis.org/en/site/forusers/download.html">Download QGIS</a></p>
+<p><a href="https://github.com/GISforAppliedEconomics/data_and_syntaxis" target="_blank"><i class="fa fa-github" aria-hidden="true"> - sample data sets -</i></a></p>
 
-<p>Note, that you need to install some required packages before installing QGIS. Everything it is very well explained at the readme file.</p>
+<h2 id="main-articles-cited-during-the-presentation">Main Articles Cited during the presentation</h2>
 
-<h3 id="for-the-impatient">For the impatient</h3>
 <ul>
-  <li>If you would like to start exploring QGIS, have a look to this manual
-<a href="http://docs.qgis.org/2.14/en/docs/gentle_gis_introduction/">Nice Introduction</a></li>
+  <li><a href="https://mitpress.mit.edu/books/spatial-economy">Fujita M, Krugman P, Venables A J. The Spatial Economy: Cities, Regions, and International Trade. Cambridge:MIT,1999.</a></li>
+  <li><a href="http://pubs.aeaweb.org/doi/pdfplus/10.1257/jep.30.4.171">Dave Donaldson and Adam Storeygard, (2016). </a></li>
+  <li><a href="https://www.aeaweb.org/articles?id=10.1257/aer.102.2.994" style="font-size:16px;color:white">(Vernon Henderson, J.; Storeygard, A. and Weil, D 2012)</a></li>
+  <li><a style="font-size:20px;color:white" href="http://dx.doi.org/10.1257/aer.102.2.994" target="_blank">Henderson et al (2012)</a>,</li>
+  <li><a style="color:white;" href="http://dx.doi.org/10.1093/qje/qjw003" target="_blank">Pinkovskiy &amp; Sala-i-Martin (2016)</a>,</li>
+  <li><a style="color:white;" href="http://dx.doi.org/10.1093/qje/qju004" target="_blank">Hodler &amp; Raschky (2014)</a>, Michalopoulos &amp; Papaioannou (<a href="http://dx.doi.org/10.3982/ECTA9613" target="_blank">2013</a>,</li>
+  <li><a style="color:white;" href="http://dx.doi.org/10.1093/qje/qjt029" target="_blank">2014</a>),</li>
+  <li><a style="color:white;" href="http://dx.doi.org/10.1086/685300" target="_blank">Alesina et al (2016)</a></li>
 </ul>
 
-<h2 id="installing-python-packages">Installing python packages</h2>
+<h3 id="other-lectures-based-on-arcgis">Other lectures based on ArcGIS</h3>
 
-<p>Most of the available GIS solutions are python-based. Softwares such as ArcGIS and QGIS offer a wide range of pre-defined python syntaxis/functions to perform the most common task for GIS analysis. As we will discuss, these pre-defined functions face some restrictions that may impose an important loss of performance in your analysis. In particular, when you start running complex analysis that require more calculation power (e.g. multiprocessing, cluster based computer, among others).</p>
-
-<p>This is why we should be able to program a standalone solutions that allow to integrate GIS tools for a more complex analysis in high-perform environments. We will use the following python packages:</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>* Pandas (A basic knowledge of this package will be assumed)
-* GDAL
-* Fiona
-* rtree
-* shapely (it is usually pre-installed)
-* matplotlib
-</code></pre>
-</div>
-
-<h3 id="installing-packages-for-python">Installing packages for Python</h3>
 <ul>
-  <li>If you are windows-users, I suggest to install the conda. It is a package and  environment manager for Python (and others languages like C).
-    <ul>
-      <li>The complete version is called Anacoda <a href="https://docs.continuum.io/anaconda/">Anaconda</a></li>
-      <li>A small version is called  <a href="http://conda.pydata.org/miniconda.html">Miniconda</a>. One installed, you can install everyhing using the basic command
-Once you have installed you can install any python package just typing this
-        <div class="highlighter-rouge"><pre class="highlight"><code>conda install [package name]
-</code></pre>
-        </div>
-        <p>Or using the graphical environment provided by <a href="https://docs.continuum.io/anaconda/">Anaconda</a></p>
-      </li>
-    </ul>
-  </li>
-  <li>For mac-users, I suggest to work with the pre-installed python distributor. So, don’t install anything. Just make sure you have the dependency manager called “pip”. Look here the instruction to install ot <a href="https://pip.pypa.io/en/stable/quickstart/">pip</a>. As Anaconda, once install you can install any package using</li>
-</ul>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>conda install [package name]
-</code></pre>
-</div>
-<ul>
-  <li>You can also install the packages manually. Just go to a python repository (e.g. <a href="https://pypi.python.org/pypi">this</a>) and following the instruction from each package.</li>
-</ul>
-
-<h2 id="installing-r-and-r-studio">Installing R and R-Studio</h2>
-
-<p>You probably already had this, yet I would just like to make sure that it is your computer. During the last lecture, we will introduce two packages in R to analyze GIS.</p>
-
-<h2 id="other-resources">Other resources</h2>
-<ul>
-  <li>Replication codes and problems sets will be distributed via <a href="https://github.com">Github</a>. If you are not familiar with this control version environment, it may be a nice opportunity to start using it. Go install it and don’t hesitate to comment or improve the codes from the course.</li>
+  <li><a href="http://scholar.harvard.edu/dell/classes/gis-applied-economists-lecture-notes-only">Melissa Dell (Harvard University) -  GIS For Applied Economists</a></li>
+  <li><a href="https://sites.google.com/site/mkudamatsu/gis">Masayuki Kudamatsu (Osaka University) - ArcGIS 10 for Economics Research</a></li>
+  <li><a href="http://personal.lse.ac.uk/overman/research/GIS_and_economics_web.pdf">Henry G. Overman (LSE) - Geographical Information Systems (GIS) and Economics </a></li>
 </ul>
 
 
   </div>
   <div class="colophon">
     <p>
-      <span id="pub-date">Published on 06 Nov 2016</span> <span class="separator">&bull;</span>
+      <span id="pub-date">Published on 10 Nov 2016</span> <span class="separator">&bull;</span>
       <span id="social">Find me on <a href="">Twitter</a>!</span>
     </p>
   </div>
