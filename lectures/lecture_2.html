@@ -3,7 +3,7 @@
 
 <head>
 	<meta charset="utf-8">
-	
+
 	<!-- Titles and author for Metadata -->
 	<title>GIS for Applied Economics</title>
 	<meta name="description" content="GIS for Applied Economics">
@@ -16,7 +16,7 @@
 
 	<!-- Templates -->
 	<link rel="stylesheet" href="reveal.js/css/reveal.css">
-	<link rel="stylesheet" href="reveal.js-own-style/presentation.css" id="theme">
+	<link rel="stylesheet" href="reveal.js/css/theme/white.css" id="theme">
 	<link rel="stylesheet" href="reveal.js-own-style/print.css"  type="text/css" media="print">
 
 	<!-- Code syntax highlighting -->
@@ -48,698 +48,548 @@
 # GIS for Applied Economics #
 <br>
 
-<small>
+Visualization tools and Vector Transformation (I)
+<br>
+
+
+
 Juan Carlos Muñoz-Mora <br>
 Univeristat Pompeu Fabra
 <br>
 [juancarlos.munoz@upf.edu](mailto:juancarlos.munoz@upf.edu)
-<br> <br> <br>
+<br> 
 Nov 2016
-</small>
 
 
 ===
-# Overview #
 
-![Fatigue-related accident](inputs/lecture_1/course_overview.png)
+# Roadmap #
+
+1. Visualization tool in GIS
+3. Concepts in Vector Transformation
+4. Some examples in Economics
+5. Replication to Michalopoulos and Papaioannow (2013)
+	- The paper
+	- Introduction in PyQGIS
+	- Introduction standalone solutions GDAL an Fiona
+	- Replication
+
+===
+
+## Visualization and GIS ##
+
+![Fatigue-related accident](inputs/lecture_2/1280px-Minard.png) <!-- .element class="fragment" data-fragment-index="1" -->
+ 
+<small>Charles Joseph Minard (1869) </small>  <!-- .element class="fragment" data-fragment-index="1" -->
 
 ---
-- Learning by doing approach (½ theory/applications - ½ practice) <!-- .element class="fragment" data-fragment-index="1" -->
-<br>
-- We will replicate published papers, yet we can consider use your own research as practice <!-- .element class="fragment" data-fragment-index="2" -->
-<br>
-- #### Evaluation <!-- .element class="fragment" data-fragment-index="3" -->
-	- Option 1: A single problem set at the end <!-- .element class="fragment" data-fragment-index="3" -->
-	- Option 2: Small task after each session <!-- .element class="fragment" data-fragment-index="3" -->
+
+#### Types of Maps
+
+![Fatigue-related accident](inputs/lecture_2/types_map_1.png)
+<small>Source: [California Geographic Alliance,2010](http://humboldt.edu/cga/atlas-sources-credits) </small>
+
+---
+
+![Fatigue-related accident](inputs/lecture_2/types_map_2.png)
+<small>Source: [California Geographic Alliance,2010](http://humboldt.edu/cga/atlas-sources-credits) </small>
+
+---
+
+## Desktop Solution in QGIS
+
+![QGIS_1](inputs/lecture_2/QGIS_visualization_1.png)
+
+---
+
+## Desktop Solution in QGIS
+
+![QGIS_1](inputs/lecture_2/QGIS_visualization_2.png)
+
+---
+
+## PyQGIS approach (Render)
+
+<pre><code data-trim data-noesc>
+mapRenderer = iface.mapCanvas().mapRenderer()
+c = QgsComposition(mapRenderer)
+c.setPlotStyle(QgsComposition.Print)
+</code> </pre>
+
+[See more](http://docs.qgis.org/2.14/en/docs/pyqgis_developer_cookbook/composer.html#output-using-map-composer)
+
+---
+
+## Visualization tools in R
+
+- [ggplot2](https://journal.r-project.org/archive/2013-1/kahle-wickham.pdf)
+- rgdal
+- rgeos
+- maptools
+- Shiny and Rcharts <!-- .element class="fragment grow" data-fragment-index="1" -->
+
+---
+
+<pre><code data-trim data-noesc>
+library(maptools)
+library(RColorBrewer)
+
+## set the working directory.
+setwd("../Session_2/Polygons/")
+
+## load the shapefile
+africa<- readShapePoly("Africa_dvp_level0.shp") 
+
+#select color palette and the number colors (levels of income) to represent on the map
+colors <- brewer.pal(6, "YlOrRd") #set breaks for the 6 colors 
+plot(zip, col=colors[(africa$REGION)], axes=F)
+
+#add a title
+title(paste ("Africa Regions"))
+
+#add a legend
+legend(x=6298809, y=2350000, legend=leglabs(round(brks)), fill=colors, bty="n",x.intersp = .5, y.intersp = .5)
+</code> </pre>
+
+---
+
+![QGIS_1](inputs/lecture_2/example_R.png)
+
+---
+
+## Python
+
+- geopandas
+- basemap
+
+
+---
+
+<pre><code data-trim data-noesc>
+
+import geopandas as gp
+import matplotlib.pyplot as plt
+
+# Open file
+data_folder=
+shp_file="/Users/juancarlosmunoz/Dropbox/Documents/Teaching/00_GIS_Applied_Economics/"
+africa = gp.GeoDataFrame.from_file(shp_file+"data_and_syntaxis/Session_2/Polygons/Africa_dvp_level0.shp")
+
+## Make the map
+fig     = plt.figure()
+africa.plot(column='REGION', colormap='OrRd')
+plt.show()
+</code></pre>
+
+---
+
+![QGIS_1](inputs/lecture_2/example_python.png)
+
+---
+
+## Javascript and Python
+- Plot.ly
+- Tableau
+- D3.js
+- Charts.js
+
+---
+
+<iframe width="100%" height="700" src="http://kyrandale.com/static/talks/reveal.js/demos/nobel_viz/index.html" frameborder="0" allowfullscreen></iframe>
+
+---
+
+### Nice references in data visualization
+
+- [Tufte, T. (2001). The Visual Display of Quantitative Information](https://www.edwardtufte.com/tufte/books_vdqi) - General
+- [Data visualization with python & JavaScript -  Kyral Dale (2016)](https://www.amazon.com/Data-Visualization-Python-JavaScript-Transform/dp/1491920513)
+
+===
+
+# Concepts in Vector Transformation (I) #
+
+- Intersection
+- Union
+- Dissolve 
+- Spatial Join
+
+---
+
+## An important concept
+
+![QGIS_1](inputs/lecture_2/bounding_box.jpg)
+
+
+---
+
+## Intersection
+
+![QGIS_1](inputs/lecture_2/intersection.png) | ![QGIS_1](inputs/lecture_2/intersection_2.png)
+
+---
+
+- Polygon + Line = ?
+- Polygon + Point = ?
+- Point + Line = ?
+
+---
+
+## Union
+
+![QGIS_1](inputs/lecture_2/union.jpg)
+
+
+---
+
+## Dissolve
+
+![QGIS_1](inputs/lecture_2/dissolve.jpg)
+
+
+---
+
+## Spatial Join (points in polygon)
+
+![QGIS_1](inputs/lecture_2/spatial_join.gif)
+
+===
+
+# Vector Transformation in Action
+
+---
+
+## [Ethnic Inequality](http://www.journals.uchicago.edu/doi/10.1086/685300)
+
+Alberto Alesina, Stelios Michalopoulos, and Elias Papaioannou. 
+
+Journal of Political Economy (2016) 124:2, 428-488 
+
+
+Document and explore the correlates of ethnic inequality
+
+---
+### Africa
+
+<img src="inputs/lecture_2/alesina_back_1.png" style="border: none; background: none; box-shadow:none; width:800px; float: center;">
+
+---
+### Africa + GREG Homeland
+
+<img src="inputs/lecture_2/alesina_back_2.png" style="border: none; background: none; box-shadow:none; width:800px; float: center;">
+
+---
+### Example for Afghanistan
+
+<table>
+<td>
+<img src="inputs/lecture_2/alesina_1.png" style="border: none; background: none; box-shadow:none; width:400px; float: center;">
+</td>
+<td>
+<img src="inputs/lecture_2/alesina_2.jpg" style="border: none; background: none; box-shadow:none; width:400px; float: center;">
+</td>
+</table>
+
+---
+### Gini index
+
+
+![QGIS_1](inputs/lecture_2/alesina_gini.png)
+
+---
+### Main results
+
+![QGIS_1](inputs/lecture_2/alesina_result.jpg)
+
+---
+
+## [Air Pollution and Infant Health: What Can We Learn from California's Recent Experience?](http://qje.oxfordjournals.org/content/120/3/1003.short)
+
+Janet Currie and Matthew Neidell. The Quarterly Journal of Economics (2005) 120 (3): 1003-1030.
+
+
+---
+
+This paper examines the impact of air pollution on infant death in California over the 1990s.
+
+- Infant mortality: individual-level with zip-code of mothers' residency
+- Air pollution: monitor-level (geo-referenced)
+- Monitor locations & zip-code polygons 
+
+### Main findings
+
+They find that reductions in carbon monoxide over the 1990s saved approximately 1000 infant lives in California.
+
+---
+
+### Ozone monitors in California. 
+<img src="inputs/lecture_2/currie_neidell_1.jpg" style="border: none; background: none; box-shadow:none; width:600px; float: center;">
+<small>Source: Neidell, 2004</small>
+
+===
+
+#[National Institutions and Subnational Development in Africa](http://qje.oxfordjournals.org/content/129/1/151.full)   
+
+Michalopoulos and Papaioannow. The Quarterly Journal of Economics (2014) 129 (1): 151-213.
+
+---
+
+## Paper 
+
+They investigate the role of national institutions on subnational African
+development in a novel framework that accounts for both local geography and
+cultural-genetic traits.
+
+- political boundaries $\rightarrow$ partitioned more than 200 ethnic groups 
+
+### Method
+
+- Matching type
+- Spatial Regression Discontinuity approach (pixel level)
+
+---
+
+### Berlin Conference: Partitioned Africa Among Colonizers
+
+![QGIS_1](inputs/lecture_2/berlin-conference.jpg)
+
+---
+
+<img src="inputs/lecture_2/stelios_1.png" style="border: none; background: none; box-shadow:none; width:460px; float: center;">  <img src="inputs/lecture_2/stelios_2.png" style="border: none; background: none; box-shadow:none; width:460px; float: center;">
+
+---
+
+<img src="inputs/lecture_2/stelios_3.png" style="border: none; background: none; box-shadow:none; width:460px; float: center;">  <img src="inputs/lecture_2/stelios_4.png" style="border: none; background: none; box-shadow:none; width:460px; float: center;">
+
+---
+
+## Defining partitioned
+
+- At least 10% of the historical homeland belongs to more than one contemporary
+state. 
+- They drop partitioned areas of less than 100 square kilometers as tiny partitions are most likely due to the lack of precision and projection error.
+
+---
+
+![QGIS_1](inputs/lecture_2/stelios_5.png)
+
+---
+
+![QGIS_1](inputs/lecture_2/stelios_specification_1.png)
+
+Similar at pixel level
+
+$IQLc$ denotes institutional quality of country c (World Bank's Governance Indicators)
+
+---
+
+![QGIS_1](inputs/lecture_2/stelios_results_1.png)
+
+$\uparrow$ higher institutional $\rightarrow$ $\uparrow$ higher levels of development
+
+---
+
+- Regression Discontinuity Design (RD-polynomials of the distance from
+the centroid of each pixel) - Discussed on Thursday 
+-  Other analysis - Robustness Check
+
+===
+
+## Replicate to the baseline results...
+
+Law for coding: "the nose rule"
+
+## Keep it simply!
+
+---
+
+## PyQGIS
+
+- Python library with a pre-defined 
+- [Nice manual](http://docs.qgis.org/2.14/en/docs/index.html)
+- Two ways to use it
+	- Within QGIS (using active layers)
+	- Using external compilers
+
+---
+
+![QGIS_1](inputs/lecture_2/qgis_python.png)
+
+---
+
+## Basic Use (within QGIS) - Starting
+
+<pre><code data-trim data-noescape>
+# Loading all libraries
+from qgis.core import *
+import qgis.utils
+from qgis import *
+from qgis.analysis import * 
+import PyQt4
+from PyQt4 import QtCore, QtGui
+
+</code></pre>
+
+---
+
+## Basic Use (within QGIS)
+
+<pre><code data-trim data-noescape>
+
+# We use the active layer
+layer=qgis.utils.iface.activeLayer()
+
+# Get all layer actives
+mapcanvas = iface.mapCanvas()
+layers_3 = mapcanvas.layers()
+print layers[0].name()
+
+# Another option is open a layer 
+layer2 = iface.addVectorLayer("shp/path", "test", "ogr")
+
+# Check the Name
+layer.id()
+</code></pre>
+
+---
+
+## Basic Use (within QGIS) (cont...)
+
+<pre><code data-trim data-noescape>
+# Check the columns within the feature
+iter = layer.getFeatures()
+for feature in iter:
+
+    # retrieve every feature with its geometry and attributes
+    # fetch geometry
+    geom = feature.geometry()
+    print "Feature ID %d: " % feature.id()
+
+    # Get Attributes
+    attrs = feature.attributes()
+
+    # Print Attributes
+    print attrs
+
+</code></pre>
+
+---
+
+## Intersection 
+
+
+<pre><code data-trim data-noescape>
+src_shpA = "shapefile/path/1"
+src_shpB = "shapefile/path/1"
+dst_shp  = "shapefile/path/1"
+shpA = QgsVectorLayer( src_shpA  , "layerA", "ogr")
+shpB = QgsVectorLayer( src_shpB  , "layerB", "ogr")
+# Prepare processing framework 
+
+QgsOverlayAnalyzer().intersection( shpA , shpB  , dst_shp )
+
+</code></pre>
+
+---
+
+## Standalone QGIS Initilization Script for QGis running on Mac OS X
+
+<pre><code data-trim data-noescape>
+import os
+import sys
+
+#Implicitly define where plugins are for QGIS
+sys.path.append('/Applications/QGIS.app/Contents/Resources/python/')
+sys.path.append('/Applications/QGIS.app/Contents/Resources/python/plugins')
+
+# Here you work as you were within QGIS
+
+</code></pre>
+
+---
+
+## Standalone Solution
+
+- Two libraries 
+	- [Fiona (based on OGR)](https://pypi.python.org/pypi/Fiona/)
+	- [Rtree](http://toblerity.org/rtree/)
+	- [Shapely](http://toblerity.org/shapely/manual.html)
+
+---
+
+## Loading Packages for replication (within QGIS) (cont...)
+
+<pre><code data-trim data-noescape>
+from shapely.geometry import shape, mapping
+import os,sys
+import fiona
+import rtree 
+from fiona.crs import from_epsg
+</code></pre>
+
+---
+
+Spatial Tree (Rtree)
+
+<img src="inputs/lecture_2/rtree.png" style="border: none; background: none; box-shadow:none; width:500px; float: center;">
+
+---
+
+<pre><code data-trim data-noescape>
+## Declare the working folders
+with fiona.open(murdock, 'r') as murdock_shp:
+    with fiona.open(africa_level1, 'r') as africa:
+
+        ### Define the schema for the final output
+        schema = {'geometry':'Polygon','properties': {'murdock_group': 'str','partition': 'int:10','area': 'float'}}
+        with fiona.open(output, 'w', 'ESRI Shapefile', schema,crs=from_epsg(4326)) as output:
+
+            ### Build Spatial Index
+            index = rtree.index.Index()
+            print "Creating the Spatial index - coastline"
+            for feat1 in africa:
+                fid = int(feat1['id'])
+                geom1 = shape(feat1['geometry'])
+                index.insert(fid, geom1.bounds)
+
+            ## Iterate over Murdock features
+            for feat in murdock_shp:
+              geom = shape(feat['geometry'])
+              area_orig= geom.area
+
+              ## Now, we check whether it intersects
+              for fid in list(index.intersection(geom.bounds)):
+                feat2=africa[fid]
+                geom3 = shape(feat2['geometry'])
+                area_int= geom3.area
+                ## 
+                number_part=0
+                if geom.intersects(geom3):
+                    per=area_int/area_orig
+                    if per>0.1 and per<1:
+                        prop={'murdock_group': feat['properties']['NAME'],'partition': 1,'area': area_int}
+                        output.write({
+                                    'properties': prop,
+                                    'geometry': mapping(geom.intersection(geom3))
+                                })
+                    else:
+                        pass
+
+</code></pre>
+
+
+===
+
+Let's replicate!
+
+---
+- Coordinate system?
+- 
+
+
 </script>
 </section>
 
-<!-- Section 2: Why should we   -->
-<section id="sec2" data-transition="fade" data-background="inputs/lecture_1/earth_night_rotate_lrg.jpg">
 
-			<!-- Introduction -->
-				<section>
-					<h2 style="color:white;">
-						Why should we care about GIS in Economics?
-					</h2>
-				</section>
-
-			<!-- New - Old concepts -->
-				<section>
-					<h2 style="color:white;">
-						It is not new concept in Economic thought!
-					</h2>
-					<blockquote class="fragment fade-in">
-						<small>
-						[...] if economics profession has notably neglected it [geography], this is not because economists have been uninterested in the subject, but because they have regarded it as intractable.
-						</small>
-					</blockquote>
-					<p style="font-size:16px;color:white">Source:  <a href="https://mitpress.mit.edu/books/spatial-economy" style="font-size:16px;color:white">Fujita, M; Krugman, P and Venables, A., 1999</a>.</p>
-
-					<h3 style="color:white;">
-						<p class="fragment fade-in">So, what's new?</p> 
-					</h3>
-				</section>
-
-				<!-- 1. Amazing GIS data available -->
-
-					<section>
-					<h1 style="color:white;">
-						[1] New amazing  GIS data sets available out there
-					</h1>
-					<h3 style="color:white;">
-						<p class="fragment fade-up">provides a original source of variation</p> 
-					</h3>
-				</section>
-
-				<!-- 1.1. Satellital Maps -->
-				<section>
-					<h2 style="color:white;">
-						Remotely sensed information <p style="font-size:16px;color:white"> <a href="http://pubs.aeaweb.org/doi/pdfplus/10.1257/jep.30.4.171" style="font-size:16px;color:white">(Donaldson and Storeygard, 2016)</a>.</p>
-					</h2>
-					<ul style="color:white;" class="fragment fade-up">
-						<p>access to information difficult to obtain by other means </p>
-						<p> unusually high spatial resolution </p>
-						<p> wide geographic coverage </p>
-					</ul>
-				</section>
-
-				<section>
-					<img src="inputs/lecture_1/nightlight_rwanda.png" style="border: none; background: none; box-shadow:none; width:700px; float: center;">
-					<br>
-					<a href="https://www.aeaweb.org/articles?id=10.1257/aer.102.2.994" style="font-size:16px;color:white">(Vernon Henderson, J.; Storeygard, A. and Weil, D 2012)</a>
-
-					<p style="font-size:20px;color:white">					
-						Other examples: <a  style="color:white;" href="http://dx.doi.org/10.1257/aer.102.2.994" style="font-size:20px;color:white" target="_blank">Henderson et al (2012)</a>, <a  style="color:white;" href="http://dx.doi.org/10.1093/qje/qjw003" target="_blank">Pinkovskiy & Sala-i-Martin (2016)</a>, <a  style="color:white;" href="http://dx.doi.org/10.1093/qje/qju004" target="_blank">Hodler & Raschky (2014)</a>, Michalopoulos & Papaioannou (<a href="http://dx.doi.org/10.3982/ECTA9613" target="_blank">2013</a>, <a  style="color:white;" href="http://dx.doi.org/10.1093/qje/qjt029" target="_blank">2014</a>), <a  style="color:white;" href="http://dx.doi.org/10.1086/685300" target="_blank">Alesina et al (2016)</a>, among others.
-					</p> 
-
-				</section>
-
-				<!-- 1.2. Recovery Old Maps -->
-					<section>
-						<h2 style="color:white;">
-							 Historical Maps
-						</h2>
-						<h3 style="color:white;">
-							<p class="fragment fade-up">recovery old (persistent) characteristics </p> 
-						</h3>
-					</section>
-
-					<section>
-					<center>
-						<table>
-						<td>
-						<img src="inputs/lecture_1/Murdock_Initial.png" style="border: none; background: none; box-shadow:none; width:400px; float: center;">
-						</td>
-						<td>
-						<img src="inputs/lecture_1/page_Murdock.png" style="border: none; background: none; box-shadow:none; width:300px; float: center;">
-						</td>
-						</table>
-					</center>
-						<br>
-						<p style="font-size:20px;color:white">
-							Digitized by <a style="font-size:20px;color:white" href="http://dx.doi.org/10.1162/qjec.2008.123.1.139" target="_blank">Nunn (2008)</a>. He found a
-							negative relationship between the number of slaves exported from a country and current economic performance.
-						</p>
-						<p style="font-size:20px;color:white" class="fragment" data-fragment-index="1">
-							Then use by <a style="font-size:20px;color:white" href="http://dx.doi.org/10.1257/aer.101.7.3221" target="_blank">Nunn & Wantchekon (2011)</a>, Michalopoulos & Papaioannou (<a style="font-size:20px;color:white" href="http://dx.doi.org/10.3982/ECTA9613" target="_blank">2013</a>, <a style="font-size:20px;color:white" href="http://dx.doi.org/10.1093/qje/qjt029" target="_blank">2014</a>, <a style="font-size:20px;color:white" href="http://www.nber.org/papers/w17620" target="_blank">2015</a>), <a style="font-size:20px;color:white" href="http://dx.doi.org/10.1257/aer.20130604" target="_blank">Alsan (2015)</a>, <a href="http://dx.doi.org/10.1086/685300" target="_blank" style="font-size:20px;color:white">Alesina et al. (2016)</a>, etc.
-							<p>
-
-					</section>
-
-				<!-- 1.2. Recovery Old Maps -->
-					<section>
-						<h2 style="color:white;">
-							 Geo-Coded individual-level data sets 
-						</h2>
-							<h3 style="color:white;">
-							<p class="fragment fade-up">exploring geography and location as an important dimension</p> 
-						</h3>
-					</section>
-
-					<section>
-					<center>
-						<img src="inputs/lecture_1/Duranton_Overman.png" style="border: none; background: none; box-shadow:none; width:350px; float: center;">
-					</center>
-
-					<br>
-					<p style="font-size:20px;color:white">
-					<a href="http://restud.oxfordjournals.org/content/72/4/1077.short" style="font-size:16px;color:white">(Duranton, D. and Overman, H 2005)</a> &#8594 location patterns of industries in UK
-					</p>
-					<p style="font-size:20px;color:white">					
-						Others examples of geo-coded data sets:
-						.<a href="http://econ.worldbank.org/WBSITE/EXTERNAL/EXTDEC/EXTRESEARCH/EXTLSMS/0,,contentMDK:23512006~pagePK:64168445~piPK:64168309~theSitePK:3358997,00.html" style="font-size:20px;color:white">LSMS-ISA (World Bank) -> geo-coded household level 6 African countries</a>
-					</p> 
-
-					</section>
-
-				<!-- 2. Mixing exiting datasets with GIS information -->
-				<section>
-					<h2 style="color:white;">
-						[2] GIS may improve empirical strategy stronger
-					</h2>
-				</section>
-
-				<section>
-						<h2 style="color:white;">
-							 reducing the omitted-variable bias (I)
-						</h2>
-							<h3 style="color:white;">
-							<p class="fragment fade-up"> gathering more information from neighborhood </p> 
-						</h3>
-				</section>
-
-				<section>
-				<center>
-					<table>
-						<td>
-						<img src="inputs/lecture_1/Gibbons_Machin_1.png" style="border: none; background: none; box-shadow:none; width:400px; float: center;">
-						</td>
-						<td>
-						<img src="inputs/lecture_1/Gibbons_Machin_2.png" style="border: none; background: none; box-shadow:none; width:400px; float: center;">
-						</td>
-					</table>
-				</center>
-				<p style="font-size:20px;color:white">
-					<a href="http://www.sciencedirect.com/science/article/pii/S0094119004001020" style="font-size:16px;color:white">Gibbons, S. and Machin, S (2005)</a> &#8593 transport  &#8594 &#8593 house prices
-					</p>
-				<p style="font-size:20px;color:white">					
-						Another nice examples are: (i) <a href="http://dx.doi.org/10.1257/aer.100.1.35" style="font-size:20px;color:white" target="_blank">Conley & Udry (2010)</a> social learning in the diffusion Ghana </a>; (ii) <a href="https://www.aeaweb.org/articles?id=10.1257/aer.20140044" style="font-size:20px;color:white" target="_blank"> Acemoglu, D; Garcia-Jimeno, C. and Robinson (2014)</a> direct and spillover effects of local state capacity in Colombia</a>
-					</p> 
-				</section>
-
-
-				<section>
-						<h2 style="color:white;">
-							 reducing the omitted-variable bias (II)
-						</h2>
-							<h3 style="color:white;">
-							<p class="fragment fade-up">building instruments</p> 
-						</h3>
-				</section>
-
-				<section>
-						<center>
-						<img src="inputs/lecture_1/Nun_2015.png" style="border: none; background: none; box-shadow:none; width:600px; float: center;">
-					</center>
-					<p style="font-size:20px;color:white">					
-						<a style="font-size:20px;color:white" href="http://dx.doi.org/10.1162/qjec.2008.123.1.139" target="_blank">Nunn (2008)</a>
-						Current African Countries & Slave Trades
-					</p> 
-					<p style="font-size:20px;color:white">					
-						Instrument Slave Export &#8594; distances from each African country to the locations where slaves were demanded
-					</p> 
-
-				</section>
-
-				<section>
-						<h2 style="color:white;">
-							 New identification strategies
-						</h2>
-							<h3 style="color:white;">
-							<p class="fragment fade-up">Spatial Regression Discontinuity</p> 
-						</h3>
-				</section>
-
-
-
-				<section>
-						<center>
-						<img src="inputs/lecture_1/Dell(2010).png" style="border: none; background: none; box-shadow:none; width:600px; float: center;">
-					</center>
-					<p style="font-size:20px;color:white">					
-						<a style="font-size:20px;color:white" href="http://dx.doi.org/10.3982/ECTA8121" target="_blank">Dell (2010)</a>
-						Current African Countries & Slave Trades
-					</p> 
-					<p style="font-size:20px;color:white">					
-						Colonial Institutions (Mita)  &#8594; current outcomes
-					</p> 
-
-				</section>
-
-				<section>
-						<h3 style="color:white;">
-							 Exogenous unit of analysis
-						</h3>
-						<center>
-						<img src="inputs/lecture_1/all_maps_nightlight.png" style="border: none; background: none; box-shadow:none; width:600px; float: center;">
-					</center>
-					<p style="font-size:20px;color:white">					
-						<a style="font-size:20px;color:white" href="http://conference.nber.org/confer/2016/SI2016/POL/Montalvo_Reynal-Querol.pdf" target="_blank">Montalvo and Reynal-Querol (2016)</a> </p>
-				</section>
-
-
-				<!-- 3. Mixing exiting datasets with GIS information -->
-
-				<section>
-					<h2 style="color:white;">
-						[3] Provides a new dimensions to gathering micro-level data
-					</h2>
-					<h3 style="color:white;" class="fragment fade-up">
-						<p > Improve your data collection</p> 
-						<p> Most collection data software allows to gather GPS location (e.g. ODK Survey, Survey CTO, CAPI)</p> 
-					</h3>
-				</section>
-
-				<!-- 4. Mixing exiting datasets with GIS information -->
-
-
-</section>
-
-
-	<!-- Section 2: Cracking Geo-Graphical Datasets  -->
-<section id="sec2" data-transition="concave">
-
-	<!-- Introduction -->
-		<section>
-			<h2 >
-				Cracking Geo-Spatial Datasets
-			</h2>
-			<p> "Geo-spatial" data </p>
-		</section>
-
-	<!-- New - Old concepts -->
-		<section>
-				<center>
-				<img src="inputs/lecture_1/gis_data_definition.jpg" style="border: none; background: none; box-shadow:none; width:600px; float: center;">
-			</center>
-			<blockquote >
-			<small>
-			The terms "geo-spatial" refers to information that is located on the earth's surface using coordinates.
-			</small>
-			</blockquote>
-
-		</section>
-</section>
-
-	<section id="sec2" data-transition="concave">
-
-		<section>
-		<h2>"Geo-spatial" data</h2>
-			<ul class="sub-menu" type="none">
-						<li class="fragment grow"> Location (e.g. coordinates)</li>
-						<li>Type (e.g. line,area)</li>
-						<li>Attributes (e.g. temperature,...)</li>
-			</ul>
-			<p> How can I represent those points, lines, and areas on the surface of the earth? </p>
-		</section>
-			<section>
-		<h2>Geodetic Location</h2>
-				<center>
-					<table>
-						<td>
-						<img src="inputs/lecture_1/coord_2.png" style="border: none; background: none; box-shadow:none; width:400px; float: center;">
-						</td>
-						<td>
-						<img src="inputs/lecture_1/coord_3.png" style="border: none; background: none; box-shadow:none; width:500px; float: center;">
-						</td>
-					</table>
-				</center>
-				<p >  Latitude &#8594 north-south direction, relative to the equator   </p>
-				<p >  Longitude &#8594 east-west direction, relative to an arbitrary point (typically the location of the Royal Observatory in Greenwich - England)  </p>
-
-				</section>
-
-		<section>
-		<p> ... yet earth is not a perfect sphere, it is more like an oblate spheroid.</p>
-
-		<canvas width=500 height=500 class="anything">
-		<!--
-		{
-		  "initialize": "function(container) { 
-			var width = container.width,
-			    height = container.height;
-
-			var radius = height / 2 - 5,
-			    scale = radius,
-			    velocity = .02;
-			var projection = d3.geo.orthographic()
-			    .translate([width / 2, height / 2])
-			    .scale(scale)
-			    .clipAngle(90);
-			var context = container.getContext('2d');
-			var path = d3.geo.path()
-			    .projection(projection)
-			    .context(context);
-
-			d3.json('reveal.js-plugins/anything/d3/world-110m.json', function(error, world) {
-			  if (error) throw error;
-			  var land = topojson.feature(world, world.objects.land);
-			  d3.timer(function(elapsed) {
-			    context.clearRect(0, 0, width, height);
-			    context.beginPath();
-			    context.arc(width / 2, height / 2, radius, 0, 2 * Math.PI, true);
-			    context.lineWidth = 2.5;
-			    context.fillStyle = '#fff';
-			    context.fill();
-
-			    projection.rotate([velocity * elapsed, 0]);
-			    context.beginPath();
-			    path(land);
-			    context.fillStyle = '#42affa';
-			    context.fill();
-			    context.beginPath();
-			    context.arc(width / 2, height / 2, radius, 0, 2 * Math.PI, true);
-			    context.lineWidth = 2.5;
-			    context.strokeStyle = '#ccc';
-			    context.stroke();
-			  });
-			});
-			d3.select(self.frameElement).style('height', height + 'px');
-
-		    }"
-		}
-        -->
-		</canvas>
-		</section>
-
-			<section>
-			<center>
-			<img src="inputs/lecture_1/projections.png" style="border: none; background: none; box-shadow:none; width:600px; float: center;">
-			</center>
-			<blockquote >
-			<small>
-			The mathematician Carl Gausse proved that it is mathematically impossible to project $R^3$ shape (e.g. sphere), onto a flat plane without introducing some sort of distortion.
-			</small>
-			</blockquote>
-
-		</section>
-
-		<section>
-		<h2>What should we do?</h2>
-			<p class="fragment fade-up">
-				... we need to choose a distortion that fits your needs
-			</p>
-			<ul class="sub-menu" type="none">
-						<li>cylindrical </li>
-						<li>conical </li>
-						<li>azimuthal </li>
-			</ul>
-
-		</section>
-
-		<section>
-		<h2>Cylindrical Projections</h2>
-				<center>
-					<table>
-						<td>
-						<img src="inputs/lecture_1/proj_cylindrical_1.png" style="border: none; background: none; box-shadow:none; width:200px; float: center;">
-						</td>
-						<td class="fragment fade-up">
-						<img src="inputs/lecture_1/proj_cylindrical_2.png" style="border: none; background: none; box-shadow:none; width:700px; float: center;">
-						</td>
-					</table>
-				</center>
-				<p >  It include the Mercator Projection, the Equal-Area Cylindrical Projection, and the Universal Transverse Mercator Projection.    </p>
-		</section>
-
-				<section>
-		<h2>Conical Projections</h2>
-				<center>
-					<table>
-						<td>
-						<img src="inputs/lecture_1/proj_conical_1.jpg" style="border: none; background: none; box-shadow:none; width:200px; float: center;">
-						</td>
-						<td class="fragment fade-up">
-						<img src="inputs/lecture_1/proj_conical_2.jpg" style="border: none; background: none; box-shadow:none; width:700px; float: center;">
-						</td>
-					</table>
-				</center>
-				<p >  It includes  the Albers Equal-Area, the Lambert Conformal Conic Projection, and the Equidistant Projection.    </p>
-		</section>
-
-					<section>
-		<h2>Azimuthal Projections</h2>
-				<center>
-					<table>
-						<td>
-						<img src="inputs/lecture_1/proj_azimuthal_1.jpg" style="border: none; background: none; box-shadow:none; width:200px; float: center;">
-						</td>
-						<td class="fragment fade-up">
-						<img src="inputs/lecture_1/proj_azimuthal_2.jpg" style="border: none; background: none; box-shadow:none; width:400px; float: center;">
-						</td>
-					</table>
-				</center>
-				<p >  It includes the Gnomonic Projection, the Lambert Equal-Area Azimuthal Projection, and the Orthographic Projection.      </p>
-		</section>
-
-		<section>
-		<h2>Coordinate System</h2>
-			<ul class="sub-menu" type="none">
-				<li  class="fragment grow" data-fragment-index="1">Unprojected Coordinate System </li>
-				<li  class="fragment fade-in" data-fragment-index="1"> (point directly on the earth's surface) </li>
-				<br>
-				<li  class="fragment fade-in" data-fragment-index="3"> Not Projections $\rightarrow$ $(x_0,y_0)$ </li>
-				<br>
-				<li class="fragment grow" data-fragment-index="2" > Projected Coordinate System </li>
-				<li  class="fragment fade-in" data-fragment-index="2"> (point on a two-dimensional map that represents the surface of the earth) </li>
-				<br>
-				<li  class="fragment fade-in" data-fragment-index="3"> Use Projections $\rightarrow$ $(\hat{x_0},\hat{y_0})$ </li>
-			</ul>
-		</section>
-
-				<section>
-		<h2>.. still something missing</h2>
-		<p >  yet, we said that the earth is not a perfect sphere </p>
-		<blockquote class="fragment fade-in">
-			<small>
-			Datum is a mathematical model of the earth used to describe locations on the earth's surface. A datum consists of a set of reference points, often combined with a model of the shape of the earth. 
-			</small>
-		</blockquote>
-			<p class="fragment fade-in">  Most common datum: NAD 27, NAD 83 and WGS 84 </p>
-		</section>
-
-</section>
-
-<section data-transition="concave">
-
-		<section>
-		<h2>"Geo-spatial" data</h2>
-			<ul class="sub-menu" type="none">
-						<li > Raster Data</li>
-						<br>
-						<li > DEM,geo-tiff,band based files</li>
-						<li >Vector Data</li>
-						<br>
-						<li > Shapelife, Simple features, TIGER/Line,...</li>
-			</ul>
-		</section>
-
-
-		<section>
-		<h2>Vector Data</h2>
-				<center>
-					<table>
-					<tr>
-						<td>
-						<img src="inputs/lecture_1/type_data_point.tiff" style="border: none; background: none; box-shadow:none; width:50px; float: center;">
-						</td>
-						<td>
-						<img  class="fragment fade-up" data-fragment-index="1"  src="inputs/lecture_1/type_data_lines.jpg" style="border: none; background: none; box-shadow:none; width:200px; float: center;">
-						</td>
-						<td>
-						<img  class="fragment fade-up" data-fragment-index="2" src="inputs/lecture_1/type_data_polygon.jpg" style="border: none; background: none; box-shadow:none; width:200px; float: center;">
-						</td>
-												<td>
-						<img class="fragment fade-up" data-fragment-index="3" src="inputs/lecture_1/type_data_polygon_2.jpg" style="border: none; background: none; box-shadow:none; width:200px; float: center;">
-						</td>
-					</tr>
-						<td> Point $(lat,lon)$ </td>
-						<td class="fragment fade-up" data-fragment-index="1"> Linestring</td>
-						<td class="fragment fade-up" data-fragment-index="2"> Polygons</td>
-						<td class="fragment fade-up" data-fragment-index="3"> Polygons</td>
-					</table>
-				</center>
-				</section>
-
-
-		<section>
-		<h2>Raster data (images as data)</h2>
-		<img src="inputs/lecture_1/type_data_raster.jpg" style="border: none; background: none; box-shadow:none; width:500px; float: left;">
-		<p> Geo-located map set</p>
-		<p> Pixel characteristics as main attribute</p>
-		<p> Classified (Remote sensitive data)</p>
-		</section>
-
-
-
-		<!-- Introduction -->
-		<section data-transition="fade" data-background="inputs/lecture_1/exp_raster1.jpg">
-
-			<h2 style="color:white;">
-				Raster Data
-			</h2>
-		</section>
-
-	 <section data-transition="zoom" data-background="inputs/lecture_1/exp_raster2.jpg">
-
-			<h2 style="color:white;">
-				Raster Data
-			</h2>
-		</section>
-
-				<!-- Introduction -->
-		<section data-transition="zoom" data-background="inputs/lecture_1/exp_poly_1.jpg">
-
-			<h2 style="color:white;">
-				Polygons
-			</h2>
-		</section>
-
-		<section data-transition="zoom" data-background="inputs/lecture_1/exp_poly_2.jpg">
-
-			<h2 style="color:white;">
-				Polygons
-			</h2>
-		</section>
-
-		<section data-transition="zoom" data-background="inputs/lecture_1/exp_polylines.jpg">
-
-			<h2 style="color:white;">
-				Linestring
-			</h2>
-		</section>
-
-			<section data-transition="zoom" data-background="inputs/lecture_1/exp_point.jpg">
-
-			<h2 style="color:white;">
-				Point
-			</h2>
-		</section>
-
-</section>
-
-
-<section  data-transition="concave">
-
-		<section>
-		<h2>"Geo-spatial" data</h2>
-		<p> GIS data format </p>
-		<p> Getting geo-spatial dataset into a file (s) </p>
-		</section>
-
-		<section>
-		<h2>Many formats available   </h2>
-		<ul class="sub-menu" type="none">
-						<li > Raster Data</li>
-						<br>
-						<li > DEM,geo-tiff,band based files</li>
-						<li >Vector Data</li>
-						<br>
-						<li > Shapelife, Simple features, TIGER/Line,...</li>
-			</ul>
-			<p> micro-format (WKT,GeoJSON,...)</p>
-		</section>
-
-	<section>
-		<h2>Shapelife <a style="font-size:20px;color:white" href="http://www.esri.com/library/whitepapers/pdfs/shapefile.pdf" target="_blank">developed by ESRI</a> </h2>
-		<table>
-		<tr>
-			<td> .shp</td> 
-			<td> it contains the geometry (type)</td> 
-		</tr>
-		<tr>
-			<td> .shx</td> 
-			<td> fixed size </td> 
-		</tr>
-		<tr>
-			<td> .dbf</td> 
-			<td> attributes (data base)</td> 
-		</tr>
-		</table>
-		<p> Other files such as: .prj(projections)... </p>
-		<p> Same file name, yet different extensions </p>
-		</section>
-
-
-</section>
-
-
-<!-- Section 3: Cracking Geo-Graphical Datasets  -->
-
-<section  data-transition="concave">
-
-<section>
-		<h2>GIS tools</h2>
-		</section>
-
-
-	<section data-transition="zoom">
-	<h2>C, C++ and Python based solutions (objected-oriented syntaxis)</h2>
-	<center>
-		<table>
-		<tr>
-			<td>
-			<img src="inputs/lecture_1/python.png" style="border: none; background: none; box-shadow:none; width:400px; float: center;">
-			</td>
-			<td>
-			<img  src="inputs/lecture_1/language_pyridim.png" style="border: none; background: none; box-shadow:none; width:600px; float: center;">
-			</td>
-		</tr>
-		</table>
-		</center>
-		</section>
-
-
-	<section data-transition="zoom">
-	<img src="inputs/lecture_1/map_geo_languages.jpg" style="border: none; background: none; box-shadow:none; width:800px; float: center;">
-		<p>Source: <a href="https://www.packtpub.com/application-development/learning-geospatial-analysis-python">Lawhead, 2013</a></p>
-	</section>
-
-		<section data-transition="zoom">
-			<h2 style="color:white;">
-				Point
-			</h2>
-		<img src="inputs/lecture_1/ArcGISvsQGIS.png" style="border: none; background: none; box-shadow:none; width:500px; float: left;">
-		<p class="fragment" data-fragment-index="1"
->
-						<h3>ArcGIS </h3>
-					</p>
-					<ul class="fragment" data-fragment-index="1" class="sub-menu" type="none">
-						<li>
-							<i class="fa fa-thumbs-down" aria-hidden="true"></i> Commercial Software 
-						</li>
-						<br>
-						<li>
-							<i class="fa fa-thumbs-up" aria-hidden="true"></i> Pre-defined python package - ArcPy (+ Model Builder)
-						</li>
-						<br>
-						<li>
-							<i class="fa fa-thumbs-down" aria-hidden="true"></i> Memory demanding; Windows only
-						</li>
-					</ul>
-
-					<p class="fragment" data-fragment-index="2">
-						<h3> <span class="fragment highlight-red">QGIS </span></h3>
-					</p>
-					<ul class="fragment" data-fragment-index="2" class="sub-menu" type="none">
-						<li>
-							<i class="fa fa-thumbs-up" aria-hidden="true"></i> Open source software; easy to create map images; 
-						</li>
-						<li>
-							<i class="fa fa-thumbs-up" aria-hidden="true"></i> Pre-defined python package - PyQGIS
-						</li>
-						<li>
-							<i class="fa fa-thumbs-up" aria-hidden="true"></i>compatible with any OS (even android)
-						</li>
-					</ul>
-					<p class="fragment" data-fragment-index="3">
-						<a href="http://gisgeography.com/qgis-arcgis-differences/">More differences</a>
-					</p>
-		</section>
-
-<!-- Amazing  -->
-
-</section>
-
-<section  data-transition="concave">
-
-<section>
-<h2>Ready for starting?</h2>
-(download sample data sets)
-</section>
-
-</section>
 
 
 <!-- END SLIDES -->
