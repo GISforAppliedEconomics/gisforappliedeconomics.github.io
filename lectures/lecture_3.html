@@ -51,8 +51,6 @@
 Visualization tools and Vector Transformation (II)
 <br>
 
-
-
 Juan Carlos Muñoz-Mora <br>
 Univeristat Pompeu Fabra
 <br>
@@ -65,527 +63,477 @@ Nov 2016
 
 # Roadmap #
 
-1. Concepts in Vector Transformation (II)
-	- Distances
+1. Comments on the replication from previous session
+2. Additional concepts in Vector Transformation
+2. Concepts in Vector Transformation (II)
 	- Buffer
-3. Some examples in Economics
+	- Distances
+3. Buffer and distances in action
 4. Replication Dell()
 
 ===
 
-## Visualization and GIS ##
+# Replication previous session
 
-![Fatigue-related accident](inputs/lecture_2/1280px-Minard.png) <!-- .element class="fragment" data-fragment-index="1" -->
- 
-<small>Charles Joseph Minard (1869) </small>  <!-- .element class="fragment" data-fragment-index="1" -->
-
----
-
-#### Types of Maps
-
-![Fatigue-related accident](inputs/lecture_2/types_map_1.png)
-<small>Source: [California Geographic Alliance,2010](http://humboldt.edu/cga/atlas-sources-credits) </small>
+- Desktop solution?
+- Replication pyQGIS
+- Replication Standalone
 
 ---
 
-![Fatigue-related accident](inputs/lecture_2/types_map_2.png)
-<small>Source: [California Geographic Alliance,2010](http://humboldt.edu/cga/atlas-sources-credits) </small>
+### Desktop solutions (an idea)
 
----
-
-## Desktop Solution in QGIS
-
-![QGIS_1](inputs/lecture_2/QGIS_visualization_1.png)
-
----
-
-## Desktop Solution in QGIS
-
-![QGIS_1](inputs/lecture_2/QGIS_visualization_2.png)
-
----
-
-## PyQGIS approach (Render)
-
-<pre><code data-trim data-noesc>
-mapRenderer = iface.mapCanvas().mapRenderer()
-c = QgsComposition(mapRenderer)
-c.setPlotStyle(QgsComposition.Print)
-</code> </pre>
-
-[See more](http://docs.qgis.org/2.14/en/docs/pyqgis_developer_cookbook/composer.html#output-using-map-composer)
-
----
-
-## Visualization tools in R
-
-- [ggplot2](https://journal.r-project.org/archive/2013-1/kahle-wickham.pdf)
-- rgdal
-- rgeos
-- maptools
-- Shiny and Rcharts <!-- .element class="fragment grow" data-fragment-index="1" -->
-
----
-
-<pre><code data-trim data-noesc>
-library(maptools)
-library(RColorBrewer)
-
-## set the working directory.
-setwd("../Session_2/Polygons/")
-
-## load the shapefile
-africa<- readShapePoly("Africa_dvp_level0.shp") 
-
-#select color palette and the number colors (levels of income) to represent on the map
-colors <- brewer.pal(6, "YlOrRd") #set breaks for the 6 colors 
-plot(zip, col=colors[(africa$REGION)], axes=F)
-
-#add a title
-title(paste ("Africa Regions"))
-
-#add a legend
-legend(x=6298809, y=2350000, legend=leglabs(round(brks)), fill=colors, bty="n",x.intersp = .5, y.intersp = .5)
-</code> </pre>
-
----
-
-![QGIS_1](inputs/lecture_2/example_R.png)
-
----
-
-## Python
-
-- geopandas
-- basemap
-
-
----
-
-<pre><code data-trim data-noesc>
-
-import geopandas as gp
-import matplotlib.pyplot as plt
-
-# Open file
-data_folder=
-shp_file="/Users/juancarlosmunoz/Dropbox/Documents/Teaching/00_GIS_Applied_Economics/"
-africa = gp.GeoDataFrame.from_file(shp_file+"data_and_syntaxis/Session_2/Polygons/Africa_dvp_level0.shp")
-
-## Make the map
-fig     = plt.figure()
-africa.plot(column='REGION', colormap='OrRd')
-plt.show()
-</code></pre>
-
----
-
-![QGIS_1](inputs/lecture_2/example_python.png)
-
----
-
-## Javascript and Python
-- Plot.ly
-- Tableau
-- D3.js
-- Charts.js
-
----
-
-<iframe width="100%" height="700" src="http://kyrandale.com/static/talks/reveal.js/demos/nobel_viz/index.html" frameborder="0" allowfullscreen></iframe>
-
----
-
-### Nice references in data visualization
-
-- [Tufte, T. (2001). The Visual Display of Quantitative Information](https://www.edwardtufte.com/tufte/books_vdqi) - General
-- [Data visualization with python & JavaScript -  Kyral Dale (2016)](https://www.amazon.com/Data-Visualization-Python-JavaScript-Transform/dp/1491920513)
+1 add new variable attribute 
+2 make intersection 
+3 export data to R (csv)
+4 identify repeated union 
+5 join data from outside
 
 ===
 
-# Concepts in Vector Transformation (I) #
+# Additional concepts in Vector Transformation
 
-- Intersection
-- Union
-- Dissolve 
-- Spatial Join
-
----
-
-## An important concept
-
-![QGIS_1](inputs/lecture_2/bounding_box.jpg)
-
-
----
-
-## Intersection
-
-![QGIS_1](inputs/lecture_2/intersection.png) | ![QGIS_1](inputs/lecture_2/intersection_2.png)
-
----
-
-- Polygon + Line = ?
-- Polygon + Point = ?
-- Point + Line = ?
 
 ---
 
 ## Union
 
-![QGIS_1](inputs/lecture_2/union.jpg)
+![QGIS_1](inputs/lecture_3/add_union.png)<!-- .element style="border: none; background: none; box-shadow:none; width:700px; float: center;" -->
+
+---
+
+In shapely (Standalone solution)
+<pre><code data-trim data-noescape>
+a.union(b)
+</code></pre>
+
+In pyQGIS
+<pre><code data-trim data-noescape>
+processing.runalg('qgis:union', input, input2, output)
+</code></pre>
 
 
 ---
 
-## Dissolve
+## Difference
 
-![QGIS_1](inputs/lecture_2/dissolve.jpg)
-
+![QGIS_1](inputs/lecture_3/add_diff.png)<!-- .element style="border: none; background: none; box-shadow:none; width:700px; float: center;" -->
 
 ---
 
-## Spatial Join (points in polygon)
+In shapely (Standalone solution)
+<pre><code data-trim data-noescape>
+a.difference(b)
+</code></pre>
 
-![QGIS_1](inputs/lecture_2/spatial_join.gif)
+In pyQGIS
+<pre><code data-trim data-noescape>
+processing.runalg('qgis:difference', input, overlay, output)
+</code></pre>
+
+---
+
+## Symmetric Difference
+
+![QGIS_1](inputs/lecture_3/add_sym.png)<!-- .element style="border: none; background: none; box-shadow:none; width:700px; float: center;" -->
+
+---
+
+In shapely (Standalone solution)
+<pre><code data-trim data-noescape>
+a.symmetric_difference(b)
+</code></pre>
+
+In pyQGIS
+<pre><code data-trim data-noescape>
+processing.runalg('qgis:symetricaldifference', input, overlay, output)
+</code></pre>
+
+---
+
+## Spatial join
+- Overlapping
+- Near by join
+
+---
+
+### Desktop solutions (plugins)
+
+- mmqgis
+- spatial join
+
+
+### Any idea (intuition) how can we implement this in python/pyQGIS? <!-- .element class="fragment" data-fragment-index="1" -->
+
+---
+
+In shapely (Standalone solution)
+<pre><code data-trim data-noescape>
+## ---- For Polygons
+## Option 1 - 
+object.contains(other)
+## Option 2 -  at the border
+object.touches(other)
+## Option 3
+object.within(other)
+## --- For Lines
+object.crosses(other)
+object.disjoint(other)
+</code></pre>
+
+In pyQGIS
+
+```
+processing.runalg('qgis:joinattributesbylocation'
+	, target, join, predicate, 
+	summary, stats, keep, output)
+```
 
 ===
 
-# Vector Transformation in Action
+# Concepts in Vector Transformation (II)
 
 ---
 
-## [Ethnic Inequality](http://www.journals.uchicago.edu/doi/10.1086/685300)
+## Buffer
 
-Alberto Alesina, Stelios Michalopoulos, and Elias Papaioannou. 
+<blockquote>
+This operation creates a polygon around the object at a specified distance.
+</blockquote>
 
-Journal of Political Economy (2016) 124:2, 428-488 
-
-
-Document and explore the correlates of ethnic inequality
-
----
-### Africa
-
-<img src="inputs/lecture_2/alesina_back_1.png" style="border: none; background: none; box-shadow:none; width:800px; float: center;">
-
----
-### Africa + GREG Homeland
-
-<img src="inputs/lecture_2/alesina_back_2.png" style="border: none; background: none; box-shadow:none; width:800px; float: center;">
-
----
-### Example for Afghanistan
-
-<table>
-<td>
-<img src="inputs/lecture_2/alesina_1.png" style="border: none; background: none; box-shadow:none; width:400px; float: center;">
-</td>
-<td>
-<img src="inputs/lecture_2/alesina_2.jpg" style="border: none; background: none; box-shadow:none; width:400px; float: center;">
-</td>
-</table>
-
----
-### Gini index
-
-
-![QGIS_1](inputs/lecture_2/alesina_gini.png)
-
----
-### Main results
-
-![QGIS_1](inputs/lecture_2/alesina_result.jpg)
+![QGIS_1](inputs/lecture_3/add_buffer.png)<!-- .element style="border: none; background: none; box-shadow:none; width:700px; float: center;" -->
 
 ---
 
-## [Air Pollution and Infant Health: What Can We Learn from California's Recent Experience?](http://qje.oxfordjournals.org/content/120/3/1003.short)
+- Neighborhood (a very rustic definition - why?)
+- Identify spillovers of treatments
+	- [Miguel & Kremer (2004)](http://dx.doi.org/10.1111/j.1468-0262.2004.00481.x)<!-- .element target="_blank" -->, [de Mel et al. (2008)](http://dx.doi.org/10.1162/qjec.2008.123.4.1329)<!-- .element target="_blank" -->
+- Peer effect 
+	- [Conley & Udry (2010)](http://dx.doi.org/10.1257/aer.100.1.35) <!-- .element target="_blank" -->
+- Alternative ways to define treatment
+	- [Muehlenbachs et al. (2015)](http://dx.doi.org/10.1257/aer.20140079) <!-- .element target="_blank" -->
+---
 
-Janet Currie and Matthew Neidell. The Quarterly Journal of Economics (2005) 120 (3): 1003-1030.
-
+## Distances
 
 ---
 
-This paper examines the impact of air pollution on infant death in California over the 1990s.
+- Proximity (very rude)
+- Build instruments (Validity!)
+	- [Oster (2012)](http://dx.doi.org/10.1016/j.jhealeco.2011.12.006)<!-- .element target="_blank" -->
+	- [Nunn (2008)](http://dx.doi.org/10.1162/qjec.2008.123.1.139)<!-- .element target="_blank" -->
+	- More on location as a instrument see [Gibson & McKenzie 2007](http://dx.doi.org/10.1093/wbro/lkm009)<!-- .element target="_blank" -->
 
-- Infant mortality: individual-level with zip-code of mothers' residency
-- Air pollution: monitor-level (geo-referenced)
-- Monitor locations & zip-code polygons 
-
-### Main findings
-
-They find that reductions in carbon monoxide over the 1990s saved approximately 1000 infant lives in California.
+What is the different with bufffer approach?
 
 ---
 
-### Ozone monitors in California. 
-<img src="inputs/lecture_2/currie_neidell_1.jpg" style="border: none; background: none; box-shadow:none; width:600px; float: center;">
-<small>Source: Neidell, 2004</small>
+![QGIS_1](inputs/lecture_3/distance_1.png)<!-- .element style="border: none; background: none; box-shadow:none; width:700px; float: center;" -->
+
+<small>source: [ArcGIS Manual](http://desktop.arcgis.com/en/arcmap/latest/tools/analysis-toolbox/near.htm) </small>
+
+---
+
+<div position="fixed" left="0" width="100%" top="0" height="100%">
+    <iframe src="http://mbostock.github.io/d3/talk/20111116/airports.html" frameborder="0" display="block" width="1200" height="800"></iframe>
+</div>
+
+---
+
+<iframe
+  width="800"
+  height="600"
+  frameborder="0" style="border:0"
+  src="https://www.google.com/maps/embed/v1/directions?key=AIzaSyA3-eJ9nu4e9wA_SmNSlO0fp4rabiXb0t4&origin=PompeuFabra+University+Ciudadella+Barcelona&destination=Madrid+Spain&avoid=tolls|highways" allowfullscreen>
+</iframe>
+
+---
+
+<div position="fixed" left="0" width="100%" top="0" height="100%">
+    <iframe src="inputs/lecture_3/index.html" frameborder="0" display="block" width="1200" height="800"></iframe>
+</div>
+
+---
+
+Three models of the Earth to calculate distances:
+
+- Flat plane
+- Spherical
+- Ellipsoid
+
+---
+
+### Flat plane - Earth as a Flat plane 
+
+Euclidean distance (Pythagorean theorem $a^2+b^2=c^2$)
+
+![QGIS_1](inputs/lecture_3/distance_1.gif)<!-- .element style="border: none; background: none; box-shadow:none; width:500px; float: center;" -->
+
+- what if we use unprojected coordinates?
+- units
+
+---
+
+### Spherical - Earth as a perfect sphere
+
+Great circle distance (Haversine formula - decimals degrees)
+
+![QGIS_1](inputs/lecture_3/earth_spherical.jpg)<!-- .element style="border: none; background: none; box-shadow:none; width:500px; float: center;" -->
+
+---
+
+### Ellipsoid - Earth as a non-perfect sphere
+
+Great circle distance (Vincenty formula - decimals degrees)
+
+![QGIS_1](inputs/lecture_3/Earth_ellipsoidal.png)<!-- .element style="border: none; background: none; box-shadow:none; width:500px; float: center;" -->
+
+---
+
+But, what about if we would like to take into account roads?
+
+We will discuss it on the last session! <!-- .element class="fragment" data-fragment-index="1" -->
 
 ===
 
-#[National Institutions and Subnational Development in Africa](http://qje.oxfordjournals.org/content/129/1/151.full)   
-
-Michalopoulos and Papaioannow. The Quarterly Journal of Economics (2014) 129 (1): 151-213.
+# Concepts in Vector Transformation (II) in Action
 
 ---
 
-## Paper 
+## [Propaganda and Conflict: Evidence from the Rwandan Genocide](http://pubs.aeaweb.org/doi/pdfplus/10.1257/aer.20140079)
 
-They investigate the role of national institutions on subnational African
-development in a novel framework that accounts for both local geography and
-cultural-genetic traits.
+David Yanagizawa-Drott
 
-- political boundaries $\rightarrow$ partitioned more than 200 ethnic groups 
+Quarterly Journal of Economics, 2014, 129(4), pp.1947-199
+
+---
+
+The role of mass media in times of conflict and state-sponsored mass violence against civilians.
 
 ### Method
 
-- Matching type
-- Spatial Regression Discontinuity approach (pixel level)
+- RTLM transmitters and radio propagation software $\rightarrow$ radio coverage
+within each village.
+- Casual link $\rightarrow$ reception generated by Rwanda's highly varying topography
+
+### Main Finding
+
+- Broadcasts led to more violence during the genocide.
+	- $\uparrow$ participation (10% of total - 51,000 persons)
+	- $\uparrow$ spillover effects in militia violence
 
 ---
 
-### Berlin Conference: Partitioned Africa Among Colonizers
+In addition to violence by the military, attacks and massacres conducted by
+local militias groups and ordinary civilians contributed to a death toll of 0.5–1.0 million deaths(Des Forges, 1999; Straus, 2004; Verwimp, 2006).
 
-![QGIS_1](inputs/lecture_2/berlin-conference.jpg)
-
----
-
-<img src="inputs/lecture_2/stelios_1.png" style="border: none; background: none; box-shadow:none; width:460px; float: center;">  <img src="inputs/lecture_2/stelios_2.png" style="border: none; background: none; box-shadow:none; width:460px; float: center;">
+![QGIS_1](inputs/lecture_3/media_genocide.jpg)<!-- .element style="border: none; background: none; box-shadow:none; width:600px; float: left;" -->
+![QGIS_1](inputs/lecture_3/HutuPowerRadio.jpg)<!-- .element style="border: none; background: none; box-shadow:none; width:300px; float: right;" -->
 
 ---
 
-<img src="inputs/lecture_2/stelios_3.png" style="border: none; background: none; box-shadow:none; width:460px; float: center;">  <img src="inputs/lecture_2/stelios_4.png" style="border: none; background: none; box-shadow:none; width:460px; float: center;">
+![QGIS_1](inputs/lecture_3/Propaganda_and_conflict_1.jpg)<!-- .element style="border: none; background: none; box-shadow:none; width:480px; float: left;" -->  ![QGIS_1](inputs/lecture_3/Propaganda_and_conflict_2.jpg)<!-- .element style="border: none; background: none; box-shadow:none; width:480px; float: right;" -->
 
 ---
 
-## Defining partitioned
-
-- At least 10% of the historical homeland belongs to more than one contemporary
-state. 
-- They drop partitioned areas of less than 100 square kilometers as tiny partitions are most likely due to the lack of precision and projection error.
+![QGIS_1](inputs/lecture_3/main_specification.png)<!-- .element style="border: none; background: none; box-shadow:none; width:800px; float: center;" -->
 
 ---
 
-![QGIS_1](inputs/lecture_2/stelios_5.png)
+![QGIS_1](inputs/lecture_3/media_spillovers.png)<!-- .element style="border: none; background: none; box-shadow:none; width:800px; float: center;" -->
 
 ---
 
-![QGIS_1](inputs/lecture_2/stelios_specification_1.png)
-
-Similar at pixel level
-
-$IQLc$ denotes institutional quality of country c (World Bank's Governance Indicators)
+![QGIS_1](inputs/lecture_3/media_results.png)<!-- .element style="border: none; background: none; box-shadow:none; width:800px; float: center;" -->
 
 ---
 
-![QGIS_1](inputs/lecture_2/stelios_results_1.png)
-
-$\uparrow$ higher institutional $\rightarrow$ $\uparrow$ higher levels of development
+![QGIS_1](inputs/lecture_3/media_results_spil.png)<!-- .element style="border: none; background: none; box-shadow:none; width:1200px; float: center;" -->
 
 ---
 
-- Regression Discontinuity Design (RD-polynomials of the distance from
-the centroid of each pixel) - Discussed on Thursday 
--  Other analysis - Robustness Check
+## [Learning about a New Technology: Pineapple in Ghana](http://www.sciencedirect.com/science/article/pii/S0304387812000223)<!-- .element target="_blank" -->
 
-===
+Timothy G. Conley and Christopher R. Udry
 
-## Replicate to the baseline results...
-
-Law for coding: "the nose rule"
-
-## Keep it simply!
+American Economic Review 2010, 100:1, 35–69
 
 ---
 
-## PyQGIS
+The role of social learning in the diffusion of a new agricultural technology in Ghana. $\rightarrow$ Do farmers learn from their peers?
 
-- Python library with a pre-defined 
-- [Nice manual](http://docs.qgis.org/2.14/en/docs/index.html)
-- Two ways to use it
-	- Within QGIS (using active layers)
-	- Using external compilers
 
----
+## Main Findings
 
-![QGIS_1](inputs/lecture_2/qgis_python.png)
+Farmers adjust their inputs to align with those of their information neighbors who were surprisingly successful in previous periods. 
 
----
+## Data
 
-## Basic Use (within QGIS) - Starting
-
-<pre><code data-trim data-noescape>
-# Loading all libraries
-from qgis.core import *
-import qgis.utils
-from qgis import *
-from qgis.analysis import * 
-import PyQt4
-from PyQt4 import QtCore, QtGui
-
-</code></pre>
+Geo-located panel household surveys (every 6 week in 1996-98) in 3 villages of southern Ghana
 
 ---
 
-## Basic Use (within QGIS)
+## Neighborhood metric
 
-<pre><code data-trim data-noescape>
+Response to "Have you ever gone to ____ for advice about your farm?"
 
-# We use the active layer
-layer=qgis.utils.iface.activeLayer()
 
-# Get all layer actives
-mapcanvas = iface.mapCanvas()
-layers_3 = mapcanvas.layers()
-print layers[0].name()
-
-# Another option is open a layer 
-layer2 = iface.addVectorLayer("shp/path", "test", "ogr")
-
-# Check the Name
-layer.id()
-</code></pre>
+![QGIS_1](inputs/lecture_3/pinaples_network.png)<!-- .element style="border: none; background: none; box-shadow:none; width:500px; float: center;" -->
 
 ---
 
-## Basic Use (within QGIS) (cont...)
+### Empirical Specification
 
-<pre><code data-trim data-noescape>
-# Check the columns within the feature
-iter = layer.getFeatures()
-for feature in iter:
+![QGIS_1](inputs/lecture_3/pinaples_specification.png)<!-- .element style="border: none; background: none; box-shadow:none; width:600px; float: center;" -->
 
-    # retrieve every feature with its geometry and attributes
-    # fetch geometry
-    geom = feature.geometry()
-    print "Feature ID %d: " % feature.id()
-
-    # Get Attributes
-    attrs = feature.attributes()
-
-    # Print Attributes
-    print attrs
-
-</code></pre>
 
 ---
 
-## Intersection 
+### Index of Good News input levels
 
+![QGIS_1](inputs/lecture_3/pinaples_specification_1.png)<!-- .element style="border: none; background: none; box-shadow:none; width:600px; float: center;" -->
 
-<pre><code data-trim data-noescape>
-src_shpA = "shapefile/path/1"
-src_shpB = "shapefile/path/1"
-dst_shp  = "shapefile/path/1"
-shpA = QgsVectorLayer( src_shpA  , "layerA", "ogr")
-shpB = QgsVectorLayer( src_shpB  , "layerB", "ogr")
-# Prepare processing framework 
-
-QgsOverlayAnalyzer().intersection( shpA , shpB  , dst_shp )
-
-</code></pre>
+Standard errors: calculated by Conley (1999)
 
 ---
 
-## Standalone QGIS Initilization Script for QGis running on Mac OS X
-
-<pre><code data-trim data-noescape>
-import os
-import sys
-
-#Implicitly define where plugins are for QGIS
-sys.path.append('/Applications/QGIS.app/Contents/Resources/python/')
-sys.path.append('/Applications/QGIS.app/Contents/Resources/python/plugins')
-
-# Here you work as you were within QGIS
-
-</code></pre>
-
----
-
-## Standalone Solution
-
-- Two libraries 
-	- [Fiona (based on OGR)](https://pypi.python.org/pypi/Fiona/)
-	- [Rtree](http://toblerity.org/rtree/)
-	- [Shapely](http://toblerity.org/shapely/manual.html)
-
----
-
-## Loading Packages for replication (within QGIS) (cont...)
-
-<pre><code data-trim data-noescape>
-from shapely.geometry import shape, mapping
-import os,sys
-import fiona
-import rtree 
-from fiona.crs import from_epsg
-</code></pre>
-
----
-
-Spatial Tree (Rtree)
-
-<img src="inputs/lecture_2/rtree.png" style="border: none; background: none; box-shadow:none; width:500px; float: center;">
-
----
-
-<pre><code data-trim data-noescape>
-## Declare the working folders
-with fiona.open(murdock, 'r') as murdock_shp:
-    with fiona.open(africa_level1, 'r') as africa:
-
-        ### Define the schema for the final output
-        schema = {'geometry':'Polygon','properties': {'murdock_group': 'str','partition': 'int:10','area': 'float'}}
-        with fiona.open(output, 'w', 'ESRI Shapefile', schema,crs=from_epsg(4326)) as output:
-
-            ### Build Spatial Index
-            index = rtree.index.Index()
-            print "Creating the Spatial index - coastline"
-            for feat1 in africa:
-                fid = int(feat1['id'])
-                geom1 = shape(feat1['geometry'])
-                index.insert(fid, geom1.bounds)
-
-            ## Iterate over Murdock features
-            for feat in murdock_shp:
-              geom = shape(feat['geometry'])
-              area_orig= geom.area
-
-              ## Now, we check whether it intersects
-              for fid in list(index.intersection(geom.bounds)):
-                feat2=africa[fid]
-                geom3 = shape(feat2['geometry'])
-                area_int= geom3.area
-                ## 
-                number_part=0
-                if geom.intersects(geom3):
-                    per=area_int/area_orig
-                    if per>0.1 and per<1:
-                        prop={'murdock_group': feat['properties']['NAME'],'partition': 1,'area': area_int}
-                        output.write({
-                                    'properties': prop,
-                                    'geometry': mapping(geom.intersection(geom3))
-                                })
-                    else:
-                        pass
-
-</code></pre>
+![QGIS_1](inputs/lecture_3/pinaples_results.png)<!-- .element style="border: none; background: none; box-shadow:none; width:700px; float: center;" -->
 
 
 ===
 
-Let's replicate!
+# Spatial Regression Discontinuity Design
+(few words)
 
 ---
-- Coordinate system?
-- 
+
+## What is different?
+
+- Using boundaries as cutoff
+	- $\rightarrow$ lines (set)
+- Indicator - Score - coordinates
+	- two-dimensions
+
+Further  [Keele & Titiunik 2014](http://dx.doi.org/10.1093/pan/mpu014)<!-- .element target="_blank" -->
+
+---
+
+Some applications in Economics
+<table>
+	<tr>
+	<td style="text-align: center;">
+[DELL (2010)](http://onlinelibrary.wiley.com/doi/10.3982/ECTA8121/abstract;jsessionid=A27078F65311ACF92F20C3ED3A69334A.f03t03?systemMessage=Wiley+Online+Library+will+be+unavailable+on+Saturday+26th+November+2016+from+07%3A00-11%3A00+GMT+%2F+02%3A00-06%3A00+EST+%2F+15%3A00-19%3A00+SGT+for+essential+maintenance.++Apologies+for+the+inconvenience.)<!-- .element target="_blank" --> </td>
+ <td style="text-align: center;"> [MICHALOPOULOS & PAPAIOANNOU (2014)](http://qje.oxfordjournals.org/content/129/1/151)<!-- .element target="_blank" --> </td>
+	</tr>
+	<tr>
+	<td style="text-align: center;">
+![QGIS_1](inputs/lecture_3/figure1.png)<!-- .element style="border: none; background: none; box-shadow:none; width:700px; float: center;" --> 
+</td>
+	<td style="text-align: center;">
+![QGIS_1](inputs/lecture_3/MP2014f3d.png)<!-- .element style="border: none; background: none; box-shadow:none; width:250px; float: center;" --> 
+</td>
+
+</tr>
+</table>
+
+===
+
+## [The Long-term Effects of Africa's Slave Trades](http://qje.oxfordjournals.org/content/123/1/139.short)<!-- .element target="_blank" -->
+
+Nathan Nunn
+
+The Quarterly Journal of Economics (2008) 123 (1): 139-176.
+
+(GIS strategy replication)
+
+---
+
+## The paper
+
+Can part of Africa's current underdevelopment be explained by its slave trades?
+
+## Data
+
+Slaves exported from each country
+
+- from each port of Africa
+- Ethnicity of a sample of 100,00+ slaves
+- Ethnic homeland in Africa
+
+---
+
+## Reduced Form
+
+$y_{i} = \alpha + \beta \ln(\frac{export_i}{area_i})+X'_i+\varepsilon_i$
+
+<table border="0" width="100%">
+<tr>
+<td style="text-align: center">$y_{i}$</td>
+<td>GDP per capita in country $i$ in 2000</td>
+</tr>
+<tr>
+<td style="text-align: center">$exports_i$</td>
+<td># of slaves exported 1400-1900 from country $i$</td>
+</tr>
+<tr>
+<td style="text-align: center">$area_i$</td>
+<td>Land surface area of country $i$</td>
+</tr>
+<tr>
+<td style="text-align: center">$X'_i$</td>
+<td>Controls</td>
+</tr>
+</table>
+
+---
+
+## Distance as instrument
+
+![QGIS_1](inputs/lecture_3/Nunn2008F5.png)<!-- .element style="border: none; background: none; box-shadow:none; width:700px; float: center;" -->
+
+---
+
+## Exclusion Restriction - Location of slave ports
+- climate suitability of plantation crops / location of mines 
+- not affected by the distance to Africa
+- Distance to slave markets $\neq$ Distance to other economic opportunities
+
+---
+
+## First Stage
+
+$\ln(\frac{exports_i}{area_i}) = \delta + D'_i \Omega+X'_i+\mu_i$
+
+where,
+- $D'_i =$ Distance to nearest slave trade centers
+
+---
+
+## Results (First Stage)
+
+![QGIS_1](inputs/lecture_3/Nunn2008T4.png)<!-- .element style="border: none; background: none; box-shadow:none; width:700px; float: center;" -->
+
+---
+
+## Results (Second Stage)
+
+![QGIS_1](inputs/lecture_3/Nunn2008T4a.png)<!-- .element style="border: none; background: none; box-shadow:none; width:700px; float: center;" -->
+
+===
+
+# Replication plan
+
+- Distance to the Slave Trade Center
+- From each country till the Atlantic border
+
+---
+
+## 
+
 
 
 </script>
 </section>
-
 
 
 
@@ -618,30 +566,17 @@ Let's replicate!
 				center: true,
 				mouseWheel: true,
 				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
-				transition: Reveal.getQueryHash().transition || 'default', // none/fade/slide/convex/concave/zoom
-				math: {
-			        mathjax: 'https://cdn.mathjax.org/mathjax/latest/MathJax.js',
-			        config: 'TeX-AMS_HTML-full'  // See http://docs.mathjax.org/en/latest/config-files.html
-			    },
+				transition: Reveal.getQueryHash().transition || 'default', // none/fade/slide/convex/concave/zoom 
 			    //  Add annotation into the board
 			    chalkboard: { // font-awesome.min.css must be available
 					src: "chalkboard/chalkboard.json",
 					toggleChalkboardButton: { left: "80px" },
 					toggleNotesButton: { left: "130px" },
     			},
-    			menu: { // Menu works best with font-awesome installed: sudo apt-get install fonts-font-awesome
-					themes: false,
-					transitions: false,
-					markers: true,
-					hideMissingTitles: true,
-					custom: [
-				            { title: 'Plugins', icon: '<i class="fa fa-external-link"></i>', src: 'toc.html' },
-				            { title: 'About', icon: '<i class="fa fa-info"></i>', src: 'about.html' }
-				        ]
+    			math: {
+					// mathjax: 'http://cdn.mathjax.org/mathjax/latest/MathJax.js',
+					config: 'TeX-AMS_HTML-full'
 				},
-				anything: [ 
-					{className: "anything",  initialize: (function(container, options){ if (options && options.initialize) { options.initialize(container)} }) }
-				],
 				menu: { // Menu works best with font-awesome installed: sudo apt-get install fonts-font-awesome
 					themes: false,
 					transitions: false,
@@ -661,22 +596,9 @@ Let's replicate!
 					// For Markdown Codes
 					{ src: 'reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
 					{ src: 'reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-
-					{ src: 'reveal.js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
 					{ src: 'reveal.js/plugin/math/math.js', async: true },
-					{ src: 'reveal.js/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
-					{ src: 'reveal.js/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } },
-					{ src: 'reveal.js-plugins/anything/d3/d3.v3.min.js' },
-
-					{ src: 'reveal.js-plugins/anything/d3/d3.geo.projection.v0.min.js' },
-
-					{ src: 'reveal.js-plugins/anything/d3.patch.js' },
-
-					{ src: 'reveal.js-plugins/anything/d3/queue.v1.min.js' },
-
-					{ src: 'reveal.js-plugins/anything/d3/topojson.v1.min.js' },
-
-					{ src: 'reveal.js-plugins/anything/anything.js' },				
+					{ src: 'reveal.js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'reveal.js/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },		
 					{ src: 'reveal.js-plugins/menu/menu.js' },
 					{ src: 'reveal.js-plugins/chalkboard/chalkboard.js' },
 				],
