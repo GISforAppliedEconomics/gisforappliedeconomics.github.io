@@ -528,9 +528,55 @@ where,
 
 ---
 
-## 
+## Replicate its instrument
+
+- Distance to nearest slave trade centers
+- PLANARE
+
+---
+
+## Tips for PyQGIS
+
+In pyQGIS
+<pre><code data-trim data-noescape>
+processing.runalg('qgis:union', input, input2, output)
+</code></pre>
+
+---
+
+## Tips for PyQGIS
+
+Getting the centroids
+<pre><code data-trim data-noescape>
+processing.runalg('qgis:polygoncentroids', 
+	input_layer, output_layer)
+</code></pre>
+
+Feature by feature
+<pre><code data-trim data-noescape>
+for f in layer.getFeatures():
+    pt = f.geometry().centroid().asPoint()
+</code></pre>
+
+---
+
+Distance Matrix
+<pre><code data-trim data-noescape>
+processing.runalg('qgis:distancematrix', 
+	input_layer, input_field, 
+	target_layer, target_field, 
+	matrix_type, nearest_points, 
+	distance_matrix)
+</code></pre>
 
 
+===
+
+# For next session
+
+Install the following libraries
+- rasterio
+- rasterstats
 
 </script>
 </section>
