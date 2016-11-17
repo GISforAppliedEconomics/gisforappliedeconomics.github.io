@@ -48,7 +48,7 @@
 # GIS for Applied Economics #
 <br>
 
-Visualization tools and Vector Transformation (II)
+## Raster Data in Economics
 <br>
 
 Juan Carlos Muñoz-Mora <br>
@@ -63,520 +63,464 @@ Nov 2016
 
 # Roadmap #
 
-1. Comments on the replication from previous session
-2. Additional concepts in Vector Transformation
-2. Concepts in Vector Transformation (II)
-	- Buffer
-	- Distances
-3. Buffer and distances in action
-4. Replication Dell()
+1. Where we are?
+2. Basic concepts of Remote Sensing Dataset
+4. GIS techniques for raster data
+5. Satellite data in action
+6. Replication
 
 ===
 
-# Replication previous session
+# Where we are? #
 
-- Desktop solution?
-- Replication pyQGIS
-- Replication Standalone
+![Fatigue-related accident](inputs/lecture_1/course_overview.png)
+
+
+===
+<!-- .slide: data-background-color="#000000" data-background-video="inputs/lecture_4/Earth.mp4,https://s3.amazonaws.com/static.slid.es/site/homepage/v1/homepage-video-editor.webm" data-background-video-loop data-background-video-muted -->
+
+# Satellite Data in Economics 
+<small>[(Donaldson and Storeygard, 2016)](http://pubs.aeaweb.org/doi/pdfplus/10.1257/jep.30.4.171)<!-- .element target="_blank" --> </small>
+
+
+- Access to information difficult to obtain by other means <!-- .element class="fragment" data-fragment-index="1" -->
+- High Spatial Resolution <!-- .element class="fragment" data-fragment-index="2" --> 
+- Wide Geographical coverage<!-- .element class="fragment" data-fragment-index="3" -->
+
 
 ---
+<!-- .slide: data-background-color="#000000" data-background-video="inputs/lecture_4/geostationary.mp4,https://s3.amazonaws.com/static.slid.es/site/homepage/v1/homepage-video-editor.webm" data-background-video-loop data-background-video-muted -->
 
-### Desktop solutions (an idea)
+# Geostationary Orbit
 
-1 add new variable attribute 
-2 make intersection 
-3 export data to R (csv)
-4 identify repeated union 
-5 join data from outside
+<small>Source: [NASA (2016)](https://svs.gsfc.nasa.gov/4040) </small>
+
+
+---
+<!-- .slide: data-background-color="#000000" data-background-video="inputs/lecture_4/sun_synchronous.mp4,https://s3.amazonaws.com/static.slid.es/site/homepage/v1/homepage-video-editor.webm" data-background-video-loop data-background-video-muted -->
+
+# Sun-Synchronous Orbit
+
+<small>Source: [NASA (2016)](https://svs.gsfc.nasa.gov/4040) </small>
+
+
+---
+<!-- .slide: data-background-color="#000000" -->
+
+## Geostationary vs Sun-Synchronous
+
+- Resolution (36.000km vs 6.000)
+- Comparability (fixed vs mobile)
+- "swath" = area cover by a given overpass
+
+---
+<!-- .slide: data-background-color="#000000" -->
+
+## Resolution
+
+![QGIS_1](inputs/lecture_4/high_low_resolution.png)<!-- .element style="border: none; background: none; box-shadow:none; width:700px; float: center;" -->
+
+Units (degrees, arc-seconds, mts)
+
+
+---
+<!-- .slide: data-background-color="#000000" -->
+
+## Sensors and  Bands
+
+![QGIS_1](inputs/lecture_4/band.jpg)<!-- .element style="border: none; background: none; box-shadow:none; width:900px; float: center;" -->
+
+<small>Source: [NASA (2016)](https://svs.gsfc.nasa.gov/4040) </small>
+
+
+---
+<!-- .slide: data-background-color="#000000" -->
+
+## Processing
+
+- Creating 
+- Correcting projections (Orthorectification)
+- Cloud cover 
+- Forest fire
+
+$\rightarrow$ pixel as data
+
+---
+<!-- .slide: data-background-color="#000000" -->
+
+## Interpretation
+
+- Supervised
+- Unsupervised
+- Mixed methods
+
+---
+<!-- .slide: data-background-color="#000000" -->
+
+# So, raster data-set are only satellite pictures?
+
+---
+<!-- .slide: data-background-color="#000000" -->
+
+# Some example data sets
+
+---
+<!-- .slide: data-background-color="#000000" -->
+
+## Nightlight
+
+
+![QGIS_1](inputs/lecture_4/nighlight.png)<!-- .element style="border: none; background: none; box-shadow:none; width:600px; float: center;" -->
+
+(Free access,1-64 values, 75km-1km Resolution, time series) 
+
+---
+<!-- .slide: data-background-color="#000000" -->
+
+## Elevation
+
+(Free access,mts,30m) 
+
+![QGIS_1](inputs/lecture_4/elevation.jpg)<!-- .element style="border: none; background: none; box-shadow:none; width:800px; float: left;" -->
+
+<small>Source: [NASA (2016)](http://earthobservatory.nasa.gov/Features/ShuttleRetrospective/page6.php)<!-- .element target="_blank" --> </small>
+
+
+---
+<!-- .slide: data-background-color="#000000" -->
+
+## Other sources
+
+![QGIS_1](inputs/lecture_4/Donaldson_Table_Sources.png)<!-- .element style="border: none; background: none; box-shadow:none; width:600px; float: center;" -->
+
+<small>[(Donaldson and Storeygard, 2016)](http://pubs.aeaweb.org/doi/pdfplus/10.1257/jep.30.4.171)<!-- .element target="_blank" --> </small>
+
+
 
 ===
 
-# Additional concepts in Vector Transformation
+# GIS techniques for raster 
+
+- Global Operations
+ 	- Re-classification 
+ 	- Terrain Model
+- Local Operations
+	- Zonnal Statistics
+	- Terrain Model
+	- Cell Statistics
+	- Focal Statistics 
+
+---
+
+## Raster Re-classification 
+
+![QGIS_1](inputs/lecture_4/raster_oper_reclasification_0.png)<!-- .element style="border: none; background: none; box-shadow:none; width:400px; float: left;" -->
+
+![QGIS_1](inputs/lecture_4/raster_oper_reclasification_1.gif)<!-- .element style="border: none; background: none; box-shadow:none; width:400px; float: right;" -->
+
+---
+
+
+## Terrain Model (Elevation, Topography,..)
+
+Distances, coverage, among other uses.
+
+![QGIS_1](inputs/lecture_4/raster_oper_terrain_model.jpg)<!-- .element style="border: none; background: none; box-shadow:none; width:600px; float: center;" -->
 
 
 ---
 
-## Union
+## Zonnal Statistics (I)
 
-![QGIS_1](inputs/lecture_3/add_union.png)<!-- .element style="border: none; background: none; box-shadow:none; width:700px; float: center;" -->
 
----
+![QGIS_1](inputs/lecture_4/raster_oper_zonnal.png)<!-- .element style="border: none; background: none; box-shadow:none; width:400px; float: center;" -->
 
-In shapely (Standalone solution)
-<pre><code data-trim data-noescape>
-a.union(b)
-</code></pre>
-
-In pyQGIS
-<pre><code data-trim data-noescape>
-processing.runalg('qgis:union', input, input2, output)
-</code></pre>
-
+- Extract Statistics from a given zone (vector)
+- Stats=count,min,max,sum,median,std
+- Continuous vs Categorical Raster
+- CRS 
 
 ---
 
-## Difference
+## Zonnal Statistics (II) - Rasterization Strategy
 
-![QGIS_1](inputs/lecture_3/add_diff.png)<!-- .element style="border: none; background: none; box-shadow:none; width:700px; float: center;" -->
 
----
+![QGIS_1](inputs/lecture_4/raster_oper_zonnal_2.png)<!-- .element style="border: none; background: none; box-shadow:none; width:400px; float: center;" -->
 
-In shapely (Standalone solution)
-<pre><code data-trim data-noescape>
-a.difference(b)
-</code></pre>
-
-In pyQGIS
-<pre><code data-trim data-noescape>
-processing.runalg('qgis:difference', input, overlay, output)
-</code></pre>
+source: [Rasterstat library](http://pythonhosted.org/rasterstats/manual.html)<!-- .element target="_blank" -->
 
 ---
 
-## Symmetric Difference
+## Cell Statistics
 
-![QGIS_1](inputs/lecture_3/add_sym.png)<!-- .element style="border: none; background: none; box-shadow:none; width:700px; float: center;" -->
-
----
-
-In shapely (Standalone solution)
-<pre><code data-trim data-noescape>
-a.symmetric_difference(b)
-</code></pre>
-
-In pyQGIS
-<pre><code data-trim data-noescape>
-processing.runalg('qgis:symetricaldifference', input, overlay, output)
-</code></pre>
+![QGIS_1](inputs/lecture_4/raster_oper_cell.png)<!-- .element style="border: none; background: none; box-shadow:none; width:400px; float: center;" -->
 
 ---
 
-## Spatial join
-- Overlapping
-- Near by join
+## Focal Statistics
 
----
+zonnal statistics?
 
-### Desktop solutions (plugins)
+![QGIS_1](inputs/lecture_4/raster_oper_focal.png)<!-- .element style="border: none; background: none; box-shadow:none; width:400px; float: center;" -->
 
-- mmqgis
-- spatial join
-
-
-### Any idea (intuition) how can we implement this in python/pyQGIS? <!-- .element class="fragment" data-fragment-index="1" -->
-
----
-
-In shapely (Standalone solution)
-<pre><code data-trim data-noescape>
-## ---- For Polygons
-## Option 1 - 
-object.contains(other)
-## Option 2 -  at the border
-object.touches(other)
-## Option 3
-object.within(other)
-## --- For Lines
-object.crosses(other)
-object.disjoint(other)
-</code></pre>
-
-In pyQGIS
-
-```
-processing.runalg('qgis:joinattributesbylocation'
-	, target, join, predicate, 
-	summary, stats, keep, output)
-```
 
 ===
 
-# Concepts in Vector Transformation (II)
+# Satellite data in action
 
 ---
 
-## Buffer
+## [Combining satellite imagery and machine learning to predict poverty](http://science.sciencemag.org/content/353/6301/790.full.pdf+html)<!-- .element target="_blank" -->
 
-<blockquote>
-This operation creates a polygon around the object at a specified distance.
-</blockquote>
+Neal Jean, Marshall Burke, Michael Xie, W. Matthew Davis, David B. Lobell, and Stefano Ermon
 
-![QGIS_1](inputs/lecture_3/add_buffer.png)<!-- .element style="border: none; background: none; box-shadow:none; width:700px; float: center;" -->
-
----
-
-- Neighborhood (a very rustic definition - why?)
-- Identify spillovers of treatments
-	- [Miguel & Kremer (2004)](http://dx.doi.org/10.1111/j.1468-0262.2004.00481.x)<!-- .element target="_blank" -->, [de Mel et al. (2008)](http://dx.doi.org/10.1162/qjec.2008.123.4.1329)<!-- .element target="_blank" -->
-- Peer effect 
-	- [Conley & Udry (2010)](http://dx.doi.org/10.1257/aer.100.1.35) <!-- .element target="_blank" -->
-- Alternative ways to define treatment
-	- [Muehlenbachs et al. (2015)](http://dx.doi.org/10.1257/aer.20140079) <!-- .element target="_blank" -->
----
-
-## Distances
+Science
+Volume 353(6301):790-794
+August 19, 2016
 
 ---
 
-- Proximity (very rude)
-- Build instruments (Validity!)
-	- [Oster (2012)](http://dx.doi.org/10.1016/j.jhealeco.2011.12.006)<!-- .element target="_blank" -->
-	- [Nunn (2008)](http://dx.doi.org/10.1162/qjec.2008.123.1.139)<!-- .element target="_blank" -->
-	- More on location as a instrument see [Gibson & McKenzie 2007](http://dx.doi.org/10.1093/wbro/lkm009)<!-- .element target="_blank" -->
+## Visualization of features
 
-What is the different with bufffer approach?
+![QGIS_1](inputs/lecture_4/stanford_project_method.png)<!-- .element style="border: none; background: none; box-shadow:none; width:600px; float: center;" -->
+
+[Neal Jean et al. Science 2016;353:790-794](http://science.sciencemag.org/content/353/6301/790.full.pdf+html)
 
 ---
 
-![QGIS_1](inputs/lecture_3/distance_1.png)<!-- .element style="border: none; background: none; box-shadow:none; width:700px; float: center;" -->
+## Prediction Performance
 
-<small>source: [ArcGIS Manual](http://desktop.arcgis.com/en/arcmap/latest/tools/analysis-toolbox/near.htm) </small>
+![QGIS_1](inputs/lecture_4/stanford_project_results.png)<!-- .element style="border: none; background: none; box-shadow:none; width:600px; float: center;" -->
 
----
-
-<div position="fixed" left="0" width="100%" top="0" height="100%">
-    <iframe src="http://mbostock.github.io/d3/talk/20111116/airports.html" frameborder="0" display="block" width="1200" height="800"></iframe>
-</div>
+[Neal Jean et al. Science 2016;353:790-794](http://science.sciencemag.org/content/353/6301/790.full.pdf+html)
 
 ---
 
-<iframe
-  width="800"
-  height="600"
-  frameborder="0" style="border:0"
-  src="https://www.google.com/maps/embed/v1/directions?key=AIzaSyA3-eJ9nu4e9wA_SmNSlO0fp4rabiXb0t4&origin=PompeuFabra+University+Ciudadella+Barcelona&destination=Madrid+Spain&avoid=tolls|highways" allowfullscreen>
-</iframe>
+## [Evolving Comparative Advantage and the Impact of Climate Change in Agricultural Markets: Evidence from 1.7 Million Fields Around the World.](http://www.journals.uchicago.edu/doi/abs/10.1086/684719)<!-- .element target="_blank" -->
+
+Arnaud Costinot, Dave Donaldson, and Cory Smith.
+
+Journal of Political Economy (2016) - 124(1):205–248.
 
 ---
 
-<div position="fixed" left="0" width="100%" top="0" height="100%">
-    <iframe src="inputs/lecture_3/index.html" frameborder="0" display="block" width="1200" height="800"></iframe>
-</div>
+to quantify the macro-level consequences of micro-level climate shocks for a variety of crops and locations.
+
+### Data
+
+50 Countries  and 10 crops for each 1.7 millions fields covering the surface of the earth (data from before and after). Crop by crop production.
+
+
+### Main Findings
+
+Impact to a 0.26 percent reduction in global GDP when trade and production patterns are allowed to adjust. ... this corresponds to about one-sixth of total crop value.
 
 ---
 
-Three models of the Earth to calculate distances:
+### Pre-climate change estimates of agricultural productivity
 
-- Flat plane
-- Spherical
-- Ellipsoid
+Food and Agricultural Organization's Global Agro-Ecological Zones (GAEZ)
+
+- Growing characteristics from field (!!)
+- Crop Specification (Supervising)
+- Assuption technology or production
+
+Resolution: 5-arc-minute
+
+### Post-climate change estimates of agricultural productivity
+
+Different scenarios from scientist' predictions
+
+---
+### Predicted yield changes
+
+![QGIS_1](inputs/lecture_4/Donaldson_Climate_change_1.jpg)<!-- .element style="border: none; background: none; box-shadow:none; width:600px; float: center;" -->
+
+---
+<!-- .slide: data-background-image="inputs/lecture_4/Donaldson_Climate_change_2_Page_1.png" data-background-size="450px" -->
 
 ---
 
-### Flat plane - Earth as a Flat plane 
+## [There Is No Free House: Ethnic Patronage in a Kenyan Slum](http://www.mit.edu/%7Etavneet/Marx_Stoker_Suri.pdf)
 
-Euclidean distance (Pythagorean theorem $a^2+b^2=c^2$)
+Benjamin Marx, Thomas M Stoker, Tavneet Suri (MIT)
 
-![QGIS_1](inputs/lecture_3/distance_1.gif)<!-- .element style="border: none; background: none; box-shadow:none; width:500px; float: center;" -->
-
-- what if we use unprojected coordinates?
-- units
+August 2016
 
 ---
 
-### Spherical - Earth as a perfect sphere
+## General Idea
 
-Great circle distance (Haversine formula - decimals degrees)
-
-![QGIS_1](inputs/lecture_3/earth_spherical.jpg)<!-- .element style="border: none; background: none; box-shadow:none; width:500px; float: center;" -->
-
----
-
-### Ellipsoid - Earth as a non-perfect sphere
-
-Great circle distance (Vincenty formula - decimals degrees)
-
-![QGIS_1](inputs/lecture_3/Earth_ellipsoidal.png)<!-- .element style="border: none; background: none; box-shadow:none; width:500px; float: center;" -->
-
----
-
-But, what about if we would like to take into account roads?
-
-We will discuss it on the last session! <!-- .element class="fragment" data-fragment-index="1" -->
-
-===
-
-# Concepts in Vector Transformation (II) in Action
-
----
-
-## [Propaganda and Conflict: Evidence from the Rwandan Genocide](http://pubs.aeaweb.org/doi/pdfplus/10.1257/aer.20140079)
-
-David Yanagizawa-Drott
-
-Quarterly Journal of Economics, 2014, 129(4), pp.1947-199
-
----
-
-The role of mass media in times of conflict and state-sponsored mass violence against civilians.
-
-### Method
-
-- RTLM transmitters and radio propagation software $\rightarrow$ radio coverage
-within each village.
-- Casual link $\rightarrow$ reception generated by Rwanda's highly varying topography
-
-### Main Finding
-
-- Broadcasts led to more violence during the genocide.
-	- $\uparrow$ participation (10% of total - 51,000 persons)
-	- $\uparrow$ spillover effects in militia violence
-
----
-
-In addition to violence by the military, attacks and massacres conducted by
-local militias groups and ordinary civilians contributed to a death toll of 0.5–1.0 million deaths(Des Forges, 1999; Straus, 2004; Verwimp, 2006).
-
-![QGIS_1](inputs/lecture_3/media_genocide.jpg)<!-- .element style="border: none; background: none; box-shadow:none; width:600px; float: left;" -->
-![QGIS_1](inputs/lecture_3/HutuPowerRadio.jpg)<!-- .element style="border: none; background: none; box-shadow:none; width:300px; float: right;" -->
-
----
-
-![QGIS_1](inputs/lecture_3/Propaganda_and_conflict_1.jpg)<!-- .element style="border: none; background: none; box-shadow:none; width:480px; float: left;" -->  ![QGIS_1](inputs/lecture_3/Propaganda_and_conflict_2.jpg)<!-- .element style="border: none; background: none; box-shadow:none; width:480px; float: right;" -->
-
----
-
-![QGIS_1](inputs/lecture_3/main_specification.png)<!-- .element style="border: none; background: none; box-shadow:none; width:800px; float: center;" -->
-
----
-
-![QGIS_1](inputs/lecture_3/media_spillovers.png)<!-- .element style="border: none; background: none; box-shadow:none; width:800px; float: center;" -->
-
----
-
-![QGIS_1](inputs/lecture_3/media_results.png)<!-- .element style="border: none; background: none; box-shadow:none; width:800px; float: center;" -->
-
----
-
-![QGIS_1](inputs/lecture_3/media_results_spil.png)<!-- .element style="border: none; background: none; box-shadow:none; width:1200px; float: center;" -->
-
----
-
-## [Learning about a New Technology: Pineapple in Ghana](http://www.sciencedirect.com/science/article/pii/S0304387812000223)<!-- .element target="_blank" -->
-
-Timothy G. Conley and Christopher R. Udry
-
-American Economic Review 2010, 100:1, 35–69
-
----
-
-The role of social learning in the diffusion of a new agricultural technology in Ghana. $\rightarrow$ Do farmers learn from their peers?
-
-
-## Main Findings
-
-Farmers adjust their inputs to align with those of their information neighbors who were surprisingly successful in previous periods. 
+evidence of ethnic patronage (ethnic favoritism) in the housing market in a large Kenyan slum.
+- Chief different tribe $\uparrow$ rents $\downarrow$ quality housing
+- Chief same  tribe $\downarrow$ rents $\uparrow$ quality housing (investment)
 
 ## Data
 
-Geo-located panel household surveys (every 6 week in 1996-98) in 3 villages of southern Ghana
+Household-level data (own collections), Chief Surveys and high resolution satellite imagery (0.5 mts resolution)
 
 ---
 
-## Neighborhood metric
+## Assessing housing quality
 
-Response to "Have you ever gone to ____ for advice about your farm?"
-
-
-![QGIS_1](inputs/lecture_3/pinaples_network.png)<!-- .element style="border: none; background: none; box-shadow:none; width:500px; float: center;" -->
-
----
-
-### Empirical Specification
-
-![QGIS_1](inputs/lecture_3/pinaples_specification.png)<!-- .element style="border: none; background: none; box-shadow:none; width:600px; float: center;" -->
-
-
----
-
-### Index of Good News input levels
-
-![QGIS_1](inputs/lecture_3/pinaples_specification_1.png)<!-- .element style="border: none; background: none; box-shadow:none; width:600px; float: center;" -->
-
-Standard errors: calculated by Conley (1999)
-
----
-
-![QGIS_1](inputs/lecture_3/pinaples_results.png)<!-- .element style="border: none; background: none; box-shadow:none; width:700px; float: center;" -->
-
-
-===
-
-# Spatial Regression Discontinuity Design
-(few words)
-
----
-
-## What is different?
-
-- Using boundaries as cutoff
-	- $\rightarrow$ lines (set)
-- Indicator - Score - coordinates
-	- two-dimensions
-
-Further  [Keele & Titiunik 2014](http://dx.doi.org/10.1093/pan/mpu014)<!-- .element target="_blank" -->
-
----
-
-Some applications in Economics
-<table>
-	<tr>
-	<td style="text-align: center;">
-[DELL (2010)](http://onlinelibrary.wiley.com/doi/10.3982/ECTA8121/abstract;jsessionid=A27078F65311ACF92F20C3ED3A69334A.f03t03?systemMessage=Wiley+Online+Library+will+be+unavailable+on+Saturday+26th+November+2016+from+07%3A00-11%3A00+GMT+%2F+02%3A00-06%3A00+EST+%2F+15%3A00-19%3A00+SGT+for+essential+maintenance.++Apologies+for+the+inconvenience.)<!-- .element target="_blank" --> </td>
- <td style="text-align: center;"> [MICHALOPOULOS & PAPAIOANNOU (2014)](http://qje.oxfordjournals.org/content/129/1/151)<!-- .element target="_blank" --> </td>
-	</tr>
-	<tr>
-	<td style="text-align: center;">
-![QGIS_1](inputs/lecture_3/figure1.png)<!-- .element style="border: none; background: none; box-shadow:none; width:700px; float: center;" --> 
+<table border="0" cellpadding="0" cellspacing="0">
+<tr>
+	<td>July 2009</td>
+	<td>August 2012</td>
+</tr>
+<tr>
+<td>
+![QGIS_1](inputs/lecture_4/Marx_Stoker_Suri_1.jpg)<!-- .element style="border: none; background: none; box-shadow:none; width:450px; float: left;" -->
 </td>
-	<td style="text-align: center;">
-![QGIS_1](inputs/lecture_3/MP2014f3d.png)<!-- .element style="border: none; background: none; box-shadow:none; width:250px; float: center;" --> 
+<td>
+![QGIS_1](inputs/lecture_4/Marx_Stoker_Suri_2.jpg)<!-- .element style="border: none; background: none; box-shadow:none; width:450px; float: right;" -->
 </td>
-
 </tr>
 </table>
 
-===
-
-## [The Long-term Effects of Africa's Slave Trades](http://qje.oxfordjournals.org/content/123/1/139.short)<!-- .element target="_blank" -->
-
-Nathan Nunn
-
-The Quarterly Journal of Economics (2008) 123 (1): 139-176.
-
-(GIS strategy replication)
+Luminosity reflected by metal roofs (investment)
 
 ---
 
-## The paper
+<small>Distribution of Household Tribes in Kibera</small>
 
-Can part of Africa's current underdevelopment be explained by its slave trades?
+![QGIS_1](inputs/lecture_4/Marx_Stoker_Suri_3_sample.jpg)<!-- .element style="border: none; background: none; box-shadow:none; width:500px; float: center;" -->
 
-## Data
+<small>Roofs from Satellite Images in Kibera (January 2011)</small>
 
-Slaves exported from each country
-
-- from each port of Africa
-- Ethnicity of a sample of 100,00+ slaves
-- Ethnic homeland in Africa
+![QGIS_1](inputs/lecture_4/Marx_Stoker_Suri_4_Satellital.jpg)<!-- .element style="border: none; background: none; box-shadow:none; width:500px; float: center;" -->
 
 ---
 
-## Reduced Form
+# [Ethnic Diversity and Growth: Revisiting the Evidence](http://conference.nber.org/confer/2016/SI2016/POL/Montalvo_Reynal-Querol.pdf)
 
-$y_{i} = \alpha + \beta \ln(\frac{export_i}{area_i})+X'_i+\varepsilon_i$
+Jose Montalvo and Marta Reynal-Querol
 
-<table border="0" width="100%">
-<tr>
-<td style="text-align: center">$y_{i}$</td>
-<td>GDP per capita in country $i$ in 2000</td>
-</tr>
-<tr>
-<td style="text-align: center">$exports_i$</td>
-<td># of slaves exported 1400-1900 from country $i$</td>
-</tr>
-<tr>
-<td style="text-align: center">$area_i$</td>
-<td>Land surface area of country $i$</td>
-</tr>
-<tr>
-<td style="text-align: center">$X'_i$</td>
-<td>Controls</td>
-</tr>
-</table>
+<a style="font-size:20px;color:white" href="" target="_blank">Montalvo and Reynal-Querol (2016)</a> </p>
+
+(2016)
+
+(under submission)
 
 ---
 
-## Distance as instrument
+### Main Question
 
-![QGIS_1](inputs/lecture_3/Nunn2008F5.png)<!-- .element style="border: none; background: none; box-shadow:none; width:700px; float: center;" -->
+Ethnic Heterogeneity vs Economic Growth
+(mixed theoretical evidence)
 
----
+$\rightarrow$ the effect of the size of geographical units on the relationship between ethnic diversity and growth
 
-## Exclusion Restriction - Location of slave ports
-- climate suitability of plantation crops / location of mines 
-- not affected by the distance to Africa
-- Distance to slave markets $\neq$ Distance to other economic opportunities
+### Strategy
 
----
-
-## First Stage
-
-$\ln(\frac{exports_i}{area_i}) = \delta + D'_i \Omega+X'_i+\mu_i$
-
-where,
-- $D'_i =$ Distance to nearest slave trade centers
+- Build exogenous boundaries (grid-country cell)
+- Ethnic Fractionalization
+- Zonnal Statistics for all variables 
 
 ---
 
-## Results (First Stage)
-
-![QGIS_1](inputs/lecture_3/Nunn2008T4.png)<!-- .element style="border: none; background: none; box-shadow:none; width:700px; float: center;" -->
+![QGIS_1](inputs/lecture_4/Montalvo_Reynal_1.png)<!-- .element style="border: none; background: none; box-shadow:none; width:800px; float: center;" -->
 
 ---
 
-## Results (Second Stage)
+![QGIS_1](inputs/lecture_4/Montalvo_Reynal_2.png)<!-- .element style="border: none; background: none; box-shadow:none; width:800px; float: center;" -->
 
-![QGIS_1](inputs/lecture_3/Nunn2008T4a.png)<!-- .element style="border: none; background: none; box-shadow:none; width:700px; float: center;" -->
+---
+
+## Other papers to have a look
+
+- [Nunn and Puga (2011)](http://www.mitpressjournals.org/doi/abs/10.1162/REST_a_00161)
+	- Terrain ruggedness $\rightarrow$ income per capita
+	- Terrain Ruggedness index (Focal Statistics)
+- [Mayshar, Moav, Neeman and Pascali (2015)]()
+	- What caused the formation of the state
+	- Ethographic Atlas and GAEZ ()
+- More papers
+	- see [Donaldson and Storeygard (2016)](http://pubs.aeaweb.org/doi/pdfplus/10.1257/jep.30.4.171)<!-- .element target="_blank" -->
 
 ===
 
-# Replication plan
+# Replication Section
 
-- Distance to the Slave Trade Center
-- From each country till the Atlantic border
+## [The Origins of Ethnolinguistic Diversity](https://www.aeaweb.org/articles?id=10.1257/aer.102.4.1508)
+
+Stelios Michalopoulos
+
+American Economic Review, 2012, 102(4): 1508-1539
+
 
 ---
 
-## Replicate its instrument
+### Main idea
 
-- Distance to nearest slave trade centers
-- PLANARE
+Did geographic diversity cause ethnic diversity?
+
+### Data
+
+- Spatial Distribution of languages 
+- Polygon of linguistic group
+- Suitability Index for agriculture (Ramankutty et al. 2002)[http://dx.doi.org/10.1046/j.1466-822x.2002.00294.x]<!-- .element target="_blank" -->
+	- 0.5&deg x 0.5&deg resolution
+- Other variables [Yale - G-Econ database](http://gecon.yale.edu/)
+
+---
+
+![QGIS_1](inputs/lecture_4/Stelios_1.png)<!-- .element style="border: none; background: none; box-shadow:none; width:800px; float: center;" -->
+
+---
+
+### Some threats (Endogenous Location/Land Quality)
+
+- Countries with centralized modern state may have homogenized both languages and land quality
+	- Sub-national analysis
+	- Linguistic groups (Ethnologue 15th)
+
+- Country boundaries endogenous
+	- Solution: Exogenous earth grid 2.5&deg x 2.5&deg
+
+- Dyadic regression
+	- Can control for raster cell FE
+
+---
+
+### Virtual country example
+
+![QGIS_1](inputs/lecture_4/Stelios_2.png)<!-- .element style="border: none; background: none; box-shadow:none; width:800px; float: center;" -->
+
+---
+
+### Cross-"virtual country" regression
+
+<small>$ln(Languages_i))= \beta_0 + \beta_1 Latitude_i + \beta_2 sd(Elevation)_i+ \beta_3 sd(LandQuality)_i+x'\beta_4 + u_i$</small>
+
+---
+
+![QGIS_1](inputs/lecture_4/Stelios_3.png)<!-- .element style="border: none; background: none; box-shadow:none; width:800px; float: center;" -->
+
+===
+
+# Let's replicate!
+
+---
+
+## Desktop Solutions
+
+- Replicate Figure 1 (Visualization)
+- Zonnal Statistis 
 
 ---
 
 ## Tips for PyQGIS
 
-In pyQGIS
+Zonnal Statistics
 <pre><code data-trim data-noescape>
-processing.runalg('qgis:union', input, input2, output)
-</code></pre>
-
----
-
-## Tips for PyQGIS
-
-Getting the centroids
-<pre><code data-trim data-noescape>
-processing.runalg('qgis:polygoncentroids', 
-	input_layer, output_layer)
-</code></pre>
-
-Feature by feature
-<pre><code data-trim data-noescape>
-for f in layer.getFeatures():
-    pt = f.geometry().centroid().asPoint()
-</code></pre>
-
----
-
-Distance Matrix
-<pre><code data-trim data-noescape>
-processing.runalg('qgis:distancematrix', 
-	input_layer, input_field, 
-	target_layer, target_field, 
-	matrix_type, nearest_points, 
-	distance_matrix)
+processing.runalg("qgis:zonalstatistics", input_raster, 
+	band_number, input_vector,
+	column_prefix, load_flag, output_layer)
 </code></pre>
 
 
-===
 
-# For next session
-
-Install the following libraries
-- rasterio
-- rasterstats
 
 </script>
 </section>
