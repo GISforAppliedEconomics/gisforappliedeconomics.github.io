@@ -48,7 +48,7 @@
 # GIS for Applied Economics #
 <br>
 
-## Raster Data in Economics
+### Introduction to Network Analysis and Georeferencing
 <br>
 
 Juan Carlos Muñoz-Mora <br>
@@ -63,244 +63,358 @@ Nov 2016
 
 # Roadmap #
 
-1. Where we are?
-2. Basic concepts of Remote Sensing Dataset
-4. GIS techniques for raster data
-5. Satellite data in action
-6. Replication
+1. Network Analysis
+2. Networks Analysis in economic research (an example)
+4. Georeferencing (Making your own map)
+5. Georeferencing in action 
+6. Final Practice
 
 ===
 
-# Where we are? #
-
-![Fatigue-related accident](inputs/lecture_1/course_overview.png)
-
-
-===
-<!-- .slide: data-background-color="#000000" data-background-video="inputs/lecture_4/Earth.mp4,https://s3.amazonaws.com/static.slid.es/site/homepage/v1/homepage-video-editor.webm" data-background-video-loop data-background-video-muted -->
-
-# Satellite Data in Economics 
-<small>[(Donaldson and Storeygard, 2016)](http://pubs.aeaweb.org/doi/pdfplus/10.1257/jep.30.4.171)<!-- .element target="_blank" --> </small>
-
-
-- Access to information difficult to obtain by other means <!-- .element class="fragment" data-fragment-index="1" -->
-- High Spatial Resolution <!-- .element class="fragment" data-fragment-index="2" --> 
-- Wide Geographical coverage<!-- .element class="fragment" data-fragment-index="3" -->
-
+# Network Analysis
 
 ---
-<!-- .slide: data-background-color="#000000" data-background-video="inputs/lecture_4/geostationary.mp4,https://s3.amazonaws.com/static.slid.es/site/homepage/v1/homepage-video-editor.webm" data-background-video-loop data-background-video-muted -->
 
-# Geostationary Orbit
+# Why important for applied economics?
 
-<small>Source: [NASA (2016)](https://svs.gsfc.nasa.gov/4040) </small>
-
-
----
-<!-- .slide: data-background-color="#000000" data-background-video="inputs/lecture_4/sun_synchronous.mp4,https://s3.amazonaws.com/static.slid.es/site/homepage/v1/homepage-video-editor.webm" data-background-video-loop data-background-video-muted -->
-
-# Sun-Synchronous Orbit
-
-<small>Source: [NASA (2016)](https://svs.gsfc.nasa.gov/4040) </small>
-
+- Real measure of distance, neighborhood,...
+- Spill-Over effect (diffusion)
+- Social Network
 
 ---
-<!-- .slide: data-background-color="#000000" -->
 
-## Geostationary vs Sun-Synchronous
+# Basic Concepts (I)
 
-- Resolution (36.000km vs 6.000)
-- Comparability (fixed vs mobile)
-- "swath" = area cover by a given overpass
+A network is a collection of elements and their inter-relations [(Kolaczyk, R, 2009)](http://www.springer.com/us/book/9780387881454)<!-- .element target="_blank" -->
 
----
-<!-- .slide: data-background-color="#000000" -->
-
-## Resolution
-
-![QGIS_1](inputs/lecture_4/high_low_resolution.png)<!-- .element style="border: none; background: none; box-shadow:none; width:700px; float: center;" -->
-
-Units (degrees, arc-seconds, mts)
-
+<blockquote class="fragment fade-in">
+<small>
+![QGIS_1](inputs/lecture_5/network_definition.png)<!-- .element style="border: none; background: none; box-shadow:none; width:800px; float: center;" -->
+</small>
+</blockquote>
 
 ---
-<!-- .slide: data-background-color="#000000" -->
 
-## Sensors and  Bands
+German Road Network and Large Citis (i.e. > 10,000 people)
 
-![QGIS_1](inputs/lecture_4/band.jpg)<!-- .element style="border: none; background: none; box-shadow:none; width:900px; float: center;" -->
-
-<small>Source: [NASA (2016)](https://svs.gsfc.nasa.gov/4040) </small>
-
+![QGIS_1](inputs/lecture_5/road_network.png)<!-- .element style="border: none; background: none; box-shadow:none; width:800px; float: center;" -->
 
 ---
-<!-- .slide: data-background-color="#000000" -->
 
-## Processing
+# Basic Concepts (II)
 
-- Creating 
-- Correcting projections (Orthorectification)
-- Cloud cover 
-- Forest fire
+- Type of networks: directed graph, undirected graph
 
-$\rightarrow$ pixel as data
+![QGIS_1](inputs/lecture_5/exp_1.png)<!-- .element style="border: none; background: none; box-shadow:none; width:800px; float: center;" -->
 
 ---
-<!-- .slide: data-background-color="#000000" -->
 
-## Interpretation
+# Basic Concepts (III)
 
-- Supervised
-- Unsupervised
-- Mixed methods
+- Neighboorhood: set of nodes which node (i) has link
+- Degree: Number of set where they a directly connected to
+- Walk: A sequences of nodes in which two nodes have a link between them.
+- Shortest Path (geodesic∫ distance): is the length of the shorthest patch between two nodes
 
----
-<!-- .slide: data-background-color="#000000" -->
-
-# So, raster data-set are only satellite pictures?
-
----
-<!-- .slide: data-background-color="#000000" -->
-
-# Some example data sets
-
----
-<!-- .slide: data-background-color="#000000" -->
-
-## Nightlight
-
-
-![QGIS_1](inputs/lecture_4/nighlight.png)<!-- .element style="border: none; background: none; box-shadow:none; width:600px; float: center;" -->
-
-(Free access,1-64 values, 75km-1km Resolution, time series) 
-
----
-<!-- .slide: data-background-color="#000000" -->
-
-## Elevation
-
-(Free access,mts,30m) 
-
-![QGIS_1](inputs/lecture_4/elevation.jpg)<!-- .element style="border: none; background: none; box-shadow:none; width:800px; float: left;" -->
-
-<small>Source: [NASA (2016)](http://earthobservatory.nasa.gov/Features/ShuttleRetrospective/page6.php)<!-- .element target="_blank" --> </small>
-
-
----
-<!-- .slide: data-background-color="#000000" -->
-
-## Other sources
-
-![QGIS_1](inputs/lecture_4/Donaldson_Table_Sources.png)<!-- .element style="border: none; background: none; box-shadow:none; width:600px; float: center;" -->
-
-<small>[(Donaldson and Storeygard, 2016)](http://pubs.aeaweb.org/doi/pdfplus/10.1257/jep.30.4.171)<!-- .element target="_blank" --> </small>
-
-
+Other important concepts (clustering, centrality,...)
 
 ===
 
-# GIS techniques for raster 
-
-- Global Operations
- 	- Re-classification 
- 	- Terrain Model
-- Local Operations
-	- Zonnal Statistics
-	- Terrain Model
-	- Cell Statistics
-	- Focal Statistics 
+# Network Analysis in Applied Economics
 
 ---
 
-## Raster Re-classification 
+## [Trafficking Networks and the Mexican Drug War](https://www.aeaweb.org/articles?id=10.1257/aer.20121637)
 
-![QGIS_1](inputs/lecture_4/raster_oper_reclasification_0.png)<!-- .element style="border: none; background: none; box-shadow:none; width:400px; float: left;" -->
-
-![QGIS_1](inputs/lecture_4/raster_oper_reclasification_1.gif)<!-- .element style="border: none; background: none; box-shadow:none; width:400px; float: right;" -->
+American Economic Review. 2015;105 (6) :1738-1779.
 
 ---
 
+This study examines the direct and spillover effects of Mexican policy led by conservative party (PAN) towards the drug trade.
 
-## Terrain Model (Elevation)
+### Empirical Strategy
 
-Distances, coverage, among other uses.
+Regression Discontinuity Design
+- Different between PAN losses by a wide margin
+- PAN wins by a large margin
 
-![QGIS_1](inputs/lecture_4/raster_oper_terrain_model.jpg)<!-- .element style="border: none; background: none; box-shadow:none; width:600px; float: center;" -->
+### Results
+
+Drug-related violence increases substantially after close elections of conservative party mayors.
+
+$\rightarrow$ drug traffickers violence (re-allocation)
+
+---
+
+Drug-related homicides RD figures
+
+![QGIS_1](inputs/lecture_5/dell_3.png)<!-- .element style="border: none; background: none; box-shadow:none; width:800px; float: center;" -->
 
 
 ---
 
-## Zonnal Statistics (I)
+Road network and Predicted Trafficking Routes
 
-
-![QGIS_1](inputs/lecture_4/raster_oper_zonnal.png)<!-- .element style="border: none; background: none; box-shadow:none; width:400px; float: center;" -->
-
-- Extract Statistics from a given zone (vector)
-- Stats=count,min,max,sum,median,std
-- Continuous vs Categorical Raster
-- CRS 
+![QGIS_1](inputs/lecture_5/dell_1.jpg)<!-- .element style="border: none; background: none; box-shadow:none; width:800px; float: center;" -->
 
 ---
 
-## Zonnal Statistics (II) - Rasterization Strategy
+Illustration of Spillovers Methodology
 
+![QGIS_1](inputs/lecture_5/dell_2.png)<!-- .element style="border: none; background: none; box-shadow:none; width:800px; float: center;" -->
 
-![QGIS_1](inputs/lecture_4/raster_oper_zonnal_2.png)<!-- .element style="border: none; background: none; box-shadow:none; width:400px; float: center;" -->
+===
 
-source: [Rasterstat library](http://pythonhosted.org/rasterstats/manual.html)<!-- .element target="_blank" -->
+# Geo-referecing 
 
----
-
-## Cell Statistics
-
-![QGIS_1](inputs/lecture_4/raster_oper_cell.png)<!-- .element style="border: none; background: none; box-shadow:none; width:400px; float: left;" -->
+Crating your own maps
 
 ---
 
-## Focal Statistics
+### Archive Maps
 
-= zonnal statistics?
+Spanish Kingdoms 1030
 
-![QGIS_1](inputs/lecture_4/raster_oper_focal.png)<!-- .element style="border: none; background: none; box-shadow:none; width:400px; float: left;" -->
+![QGIS_1](inputs/lecture_5/spanish_kingdoms_1030.jpg)<!-- .element style="border: none; background: none; box-shadow:none; width:600px; float: center;" -->
 
+<small>Source: [ Freeman's Historical Geography, Edited by J.B. Bury, Longmans Green and Co. Third Edition 1903](https://www.lib.utexas.edu/maps/historical/spanish_kingdoms.html)<!-- .element target="_blank" --> </small>
+
+---
+
+### Be careful!
+
+![QGIS_1](inputs/lecture_5/maps_wrong.jpg)<!-- .element style="border: none; background: none; box-shadow:none; width:800px; float: center;" -->
+
+<small>Source: [ The Economists](https://www.1843magazine.com/culture/the-daily/mistaken-maps) </small>
+
+
+---
+
+### Aerial pictures
+Warsarw Before, During and After WWII
+
+![QGIS_1](inputs/lecture_5/aerial_warsarw.jpg)<!-- .element style="border: none; background: none; box-shadow:none; width:800px; float: center;" -->
+
+<small>Source: [ The Economists](https://www.1843magazine.com/culture/the-daily/mistaken-maps) </small>
+
+---
+
+### Own Collection
+
+![QGIS_1](inputs/lecture_5/lsms_plot_1.jpg)<!-- .element style="border: none; background: none; box-shadow:none; width:400px; float: left;" -->
+
+![QGIS_1](inputs/lecture_5/lsms_plot_2.jpg)<!-- .element style="border: none; background: none; box-shadow:none; width:400px; float: right;" -->
+
+<small>Source: [LSMS-ISA](http://econ.worldbank.org/WBSITE/EXTERNAL/EXTDEC/EXTRESEARCH/EXTLSMS/0,,contentMDK:23512006~pagePK:64168445~piPK:64168309~theSitePK:3358997,00.html) </small>
+
+---
+
+## Georeferencing Desktop Solution (recommended!)
+
+### Basic Definition
+- Geo-located an image <!-- .element class="fragment" data-fragment-index="1" -->
+	- Using parallels<!-- .element class="fragment" data-fragment-index="1" -->
+	- Reference Points<!-- .element class="fragment" data-fragment-index="1" -->
+	- Other information<!-- .element class="fragment" data-fragment-index="1" -->
+	- Output?<!-- .element class="fragment" data-fragment-index="1" -->
+- Once geo-refenced<!-- .element class="fragment" data-fragment-index="2" -->
+	- Create polygons,points (output?) <!-- .element class="fragment" data-fragment-index="2" -->
+	- Machine Learning Techniques - Classification (output?) <!-- .element class="fragment" data-fragment-index="2" -->
+	- Visualization <!-- .element class="fragment" data-fragment-index="2" -->
+
+---
+
+## Step 1: Georeferencing in QGIS 
+
+- Plug-in: Georeferencer-GDAL(!)
+
+Basic Steps: <!-- .element class="fragment" data-fragment-index="1" -->
+- Image <!-- .element class="fragment" data-fragment-index="1" -->
+- Set CRS<!-- .element class="fragment" data-fragment-index="1" -->
+- Insert Reference Points<!-- .element class="fragment" data-fragment-index="1" -->
+- Transformation<!-- .element class="fragment" data-fragment-index="1" -->
+
+---
+
+## Step 2: Generating a vector
+(editing )
+
+Import!
+- Check geometries
+	- Geometry Checker (plug-in)
+- Optimize polygons
+	- PolygonSimplifier (plug-in)
+
+[Have a look to the geo-referencing tools in ArcGIS as well](http://webhelp.esri.com/arcgisdesktop/9.2/index.cfm?TopicName=Georeferencing_a_raster_dataset)
+
+---
+
+### Can we do it directly in python?
+
+Yes, yet different solutions<!-- .element class="fragment" data-fragment-index="1" -->
+
+Some nice packages for doing this<!-- .element class="fragment" data-fragment-index="1" -->
+- pystretch: manipulate images larger than your RAM<!-- .element class="fragment" data-fragment-index="1" -->
+- gdal<!-- .element class="fragment" data-fragment-index="1" --> 
+
+When can I consider this solution?<!-- .element class="fragment" data-fragment-index="1" -->
+- Several pictures with the same source and location<!-- .element class="fragment" data-fragment-index="1" -->
+- Automatize geo-referencing <!-- .element class="fragment" data-fragment-index="1" -->
+
+===
+
+# Geo-referencing in action
+
+---
+
+## [The Long-term Effects of Africa's Slave Trades](http://qje.oxfordjournals.org/content/123/1/139.short)<!-- .element target="_blank" -->
+
+Nathan Nunn
+
+The Quarterly Journal of Economics (2008) 123 (1): 139-176.
+
+(GIS strategy replication)
+
+---
+
+## The paper
+
+Can part of Africa's current underdevelopment be explained by its slave trades?
+
+## Data
+
+Slaves exported from each country
+
+- from each port of Africa
+- Ethnicity of a sample of 100,00+ slaves
+- Ethnic homeland in Africa
+
+---
+
+## Reduced Form
+
+$y_{i} = \alpha + \beta \ln(\frac{export_i}{area_i})+X'_i+\varepsilon_i$
+
+<table border="0" width="100%">
+<tr>
+<td style="text-align: center">$y_{i}$</td>
+<td>GDP per capita in country $i$ in 2000</td>
+</tr>
+<tr>
+<td style="text-align: center">$exports_i$</td>
+<td># of slaves exported 1400-1900 from country $i$</td>
+</tr>
+<tr>
+<td style="text-align: center">$area_i$</td>
+<td>Land surface area of country $i$</td>
+</tr>
+<tr>
+<td style="text-align: center">$X'_i$</td>
+<td>Controls</td>
+</tr>
+</table>
+
+
+---
+
+## [The Value of Democracy: Evidence from Road Building in Kenya](https://www.aeaweb.org/research/can-democracy-combat-ethnic-favoritism.php)<!-- .element target="_blank" -->
+
+Robin Burgess, Remi Jedwab, Edward Miguel, Ameet Morjaria, Gerard Padró i Miquel
+
+The Quarterly Journal of Economics (2012) 127 (4): 1707-1754
+
+---
+
+Ethnic favoritism using data on road building in Kenyan districts across the 1963–2011 period
+
+## Empirical requirements
+
+- Track road network expansion over time
+- Baseline information on road maps<!-- .element class="fragment" data-fragment-index="1" -->
+	- Digitize Michelin maps for Kenya since 1961<!-- .element class="fragment" data-fragment-index="1" -->
+
+---
+Michelin Road Map for Liberia in 1965 (example)
+
+![QGIS_1](inputs/lecture_5/Michelin_Guides.jpg)<!-- .element style="border: none; background: none; box-shadow:none; width:800px; float: right;" -->
+
+---
+
+Michelin Road Map for Africa - 1960
+
+![QGIS_1](inputs/lecture_5/roads_michelin_1960.png)<!-- .element style="border: none; background: none; box-shadow:none; width:800px; float: right;" -->
+
+---
+
+Michelin Road Map for Africa - 1980
+
+![QGIS_1](inputs/lecture_5/roads_michelin_1980.png)<!-- .element style="border: none; background: none; box-shadow:none; width:800px; float: right;" -->
+
+---
+
+Michelin Road Map for Africa - 1990
+
+![QGIS_1](inputs/lecture_5/roads_michelin_1990.png)<!-- .element style="border: none; background: none; box-shadow:none; width:800px; float: right;" -->
+
+---
+
+Michelin Road Map for Africa - 2000
+
+![QGIS_1](inputs/lecture_5/roads_michelin_2000.png)<!-- .element style="border: none; background: none; box-shadow:none; width:800px; float: right;" -->
+
+---
+
+Michelin Road Map for Africa - 2010
+
+![QGIS_1](inputs/lecture_5/roads_michelin_2010.png)<!-- .element style="border: none; background: none; box-shadow:none; width:800px; float: right;" -->
+
+---
+
+### Main Results
+
+![QGIS_1](inputs/lecture_5/Kenia_road_results.png)
+
+---
+
+## [Railroads and American Economic Growth: a “Market Access” Approach](http://scholar.harvard.edu/files/hornbeck/files/railroads_dh_jan2015.pdf)<!-- .element target="_blank" -->
+
+Dave Donaldson and Richard Hornbeck.
+
+Quarterly Journal of Economics, 131(2):799-858, 2016.
+
+(please have a look!)
 
 
 ===
 
-# Satellite data in action
+# Final Practice
 
 ---
 
-# [Combining satellite imagery and machine learning to predict poverty](http://science.sciencemag.org/content/353/6301/790.full.pdf+html)
+## General Question
 
-Neal Jean, Marshall Burke, Michael Xie, W. Matthew Davis, David B. Lobell, and Stefano Ermon
-
-Science
-Volume 353(6301):790-794
-August 19, 2016
+Is the current development (luminosity 2013) in current Spanish communities   correlated with the former political division from Spanish Kingdoms 1210
 
 ---
 
-## Visualization of features
+## Spanish Kingdoms 1210
 
-![QGIS_1](inputs/lecture_4/stanford_project_method.png)<!-- .element style="border: none; background: none; box-shadow:none; width:600px; float: center;" -->
+![QGIS_1](inputs/lecture_5/spanish_kingdoms_1210.jpg)<!-- .element style="border: none; background: none; box-shadow:none; width:800px; float: center;" -->
 
-[Neal Jean et al. Science 2016;353:790-794](http://science.sciencemag.org/content/353/6301/790.full.pdf+html)
-
----
-
-## Prediction Performance
-
-![QGIS_1](inputs/lecture_4/stanford_project_results.png)<!-- .element style="border: none; background: none; box-shadow:none; width:600px; float: center;" -->
-
-[Neal Jean et al. Science 2016;353:790-794](http://science.sciencemag.org/content/353/6301/790.full.pdf+html)
+<small>Source: [ Freeman's Historical Geography, Edited by J.B. Bury, Longmans Green and Co. Third Edition 1903](https://www.lib.utexas.edu/maps/historical/spanish_kingdoms.html)<!-- .element target="_blank" --> </small>
 
 ---
 
+## The Practice (Road Map)
 
-
-
-===
+1. Geo-reference the archived map
+2. Create a new vector with this polygons
+3. Get only Spanish territory 
+4. Attached to the current communities their correspondent Spanish Kingdoms
+5. Get the sum of the total Nightlight 
+6. Present results visually
+7. Get the mean test by Spanish Kingdoms
+8. Present the results in a map
 
 </script>
 </section>

@@ -93,7 +93,7 @@ Nov 2016
 
 # Geostationary Orbit
 
-<small>Source: [NASA (2016)](https://svs.gsfc.nasa.gov/4040) </small>
+<small>Source: [NASA (2016)](https://svs.gsfc.nasa.gov/4040)<!-- .element target="_blank" --> </small>
 
 
 ---
@@ -460,8 +460,8 @@ Did geographic diversity cause ethnic diversity?
 - Spatial Distribution of languages 
 - Polygon of linguistic group
 - Suitability Index for agriculture (Ramankutty et al. 2002)[http://dx.doi.org/10.1046/j.1466-822x.2002.00294.x]<!-- .element target="_blank" -->
-	- 0.5&deg x 0.5&deg resolution
-- Other variables [Yale - G-Econ database](http://gecon.yale.edu/)
+	- 0.5 x 0.5 resolution
+- Other variables [Yale - G-Econ database](http://gecon.yale.edu/)<!-- .element target="_blank" -->
 
 ---
 
@@ -519,7 +519,16 @@ processing.runalg("qgis:zonalstatistics", input_raster,
 	column_prefix, load_flag, output_layer)
 </code></pre>
 
+---
 
+## Tips for rasterstats
+
+
+<pre><code data-trim data-noescape>
+from rasterstats import zonal_stats
+zonal_stats(shp, raster,
+            stats="count min mean max median")
+</code></pre>
 
 
 </script>
