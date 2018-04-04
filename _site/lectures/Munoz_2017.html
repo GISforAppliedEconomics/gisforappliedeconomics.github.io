@@ -1,0 +1,694 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	
+	<!-- Titles and author for Metadata -->
+	<title>SIG en Ciencias Sociales</title>
+	<meta name="description" content="GIS for Applied Economics">
+	<meta name="author" content="Juan Carlos Muñoz-Mora">
+
+	<!-- Options for screen -->
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+	<!-- Templates -->
+	<link rel="stylesheet" href="reveal.js/css/reveal.css">
+	<link rel="stylesheet" href="reveal.js-own-style/presentation.css" id="theme">
+	<link rel="stylesheet" href="reveal.js-own-style/print.css"  type="text/css" media="print">
+
+	<!-- Code syntax highlighting -->
+	<link rel="stylesheet" href="reveal.js/lib/css/zenburn.css">
+	<!--[if lt IE 9]>
+	<script src="reveal.js/lib/js/html5shiv.js"></script>
+	<![endif]-->
+	<script async defer src="https://buttons.github.io/buttons.js"></script>
+	</head>
+
+	<!-- ...  ...  ...  ... ... ... ... ... .. .. ..-->
+	<!-- ...  ...  ...  ... ... ... ... ... .. .. ..-->
+	<!-- 				Content 					-->
+	<!-- ...  ...  ...  ... ... ... ... ... .. .. ..-->
+	<!-- ...  ...  ...  ... ... ... ... ... .. .. ..-->
+
+	<body>
+		<div class="reveal">
+			<div class="slides">
+			<!-- START SLIDES -->
+			<!-- ...  ...  ...  ... ... ... ... ... .. .. ..-->
+			<!-- 				Slide 1	 -- Title			-->
+			<!-- ...  ...  ...  ... ... ... ... ... .. .. ..-->
+
+<!-- Section 1: General Introduction  -->
+<section data-markdown  data-separator="^\n===\n" data-separator-vertical="^\n---\n" >
+<script type="text/template">
+
+# Métodos geográficos en las ciencias sociales: #
+###  Nuevos retos y aplicaciones ###
+<br>
+
+<div style="line-height:100%;">
+<br> 
+Juan Carlos Muñoz-Mora <br> 
+<font size="3"> Institute of Development Studies y Universidad EAFIT </font>
+<br> 
+<br> <br> <br>
+Universidad de Manizales <br>
+<br>
+Noviembre 2017
+</div>
+
+===
+
+## Sistemas de Información Geográfico
+
+<blockquote>
+<small>
+[...] refieren a sistemas complejos para guardar, manipular y visualizar información geográfica. 
+</small>
+</blockquote>
+<p style="font-size:16px;">Source: Roger Tomlinson, 1974.</p>
+
+---
+
+## Por qué debemos preocuparnos por los métodos geográficos en las ciencias sociales?
+
+---
+
+No es un nuevo concepto!
+
+<blockquote class="fragment fade-in">
+<small>
+[...] if social science profession has notably neglected it [geography], this is not because we have been uninterested in the subject, but because they have regarded it as intractable.
+</small>
+</blockquote>
+
+<p style="font-size:16px;">Source:  <a href="https://mitpress.mit.edu/books/spatial-economy" style="font-size:16px">Fujita, M; Krugman, P and Venables, A., 1999</a>.</p>
+
+<h3>
+	<p class="fragment fade-in">Pero, qué es nuevo?</p> 
+</h3>
+
+---
+<!-- .slide: data-background-color="#000000" data-background-video="inputs/History_GIS.mp4,https://s3.amazonaws.com/static.slid.es/site/homepage/v1/homepage-video-editor.webm" data-background-video-loop data-background-video-muted -->
+<br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br>
+<small>
+<p style="font-size:16px;color:#ffffff">Source:  <a href="http://geospatialrevolution.psu.edu/episode1/complete" style="font-size:16px;color:#ffffff">Penn State University - Public Broadcasting, 2010</a>.</p>
+</small>
+
+---
+<!-- .slide: data-background-color="#000000" -->
+
+#  <font color="white"> Revolución de información geo-espacial </font>
+
+---
+<!-- .slide: data-background-color="#000000" data-background-video="inputs/lecture_4/Earth.mp4,https://s3.amazonaws.com/static.slid.es/site/homepage/v1/homepage-video-editor.webm" data-background-video-loop data-background-video-muted -->
+
+## <font color="white"> [1] Información Satelital </font>
+
+<p style="font-size:16px;color:#ffffff"> <a href="http://pubs.aeaweb.org/doi/pdfplus/10.1257/jep.30.4.171" style="font-size:16px;color:#ffffff">(Donaldson and Storeygard, 2016)</a>.</p>
+
+<br>
+
+- Access to information difficult to obtain by other means <!-- .element class="fragment" data-fragment-index="1" style="font-size:32px;color:#ffffff" -->
+- High Spatial Resolution <!-- .element class="fragment" data-fragment-index="2" style="font-size:32px;color:#ffffff" --> 
+- Wide Geographical coverage<!-- .element class="fragment" data-fragment-index="3" style="font-size:32px;color:#ffffff" -->
+
+---
+<!-- .slide: data-background-color="#000000" -->
+
+### Nightlight <!-- .element  style="color:#ffffff" -->
+
+
+![QGIS_1](inputs/lecture_4/nighlight.png)<!-- .element style="border: none; background: none; box-shadow:none; width:600px; float: center;" -->
+
+(Free access,1-64 values, 1km Resolution, time series)<!-- .element style="font-size:32px;color:#ffffff" -->
+
+---
+<!-- .slide: data-background-color="#000000" -->
+
+<img src="inputs/lecture_1/nightlight_rwanda.png" style="border: none; background: none; box-shadow:none; width:600px; float: center;">
+<br>
+<a href="https://www.aeaweb.org/articles?id=10.1257/aer.102.2.994" style="font-size:16px;color:white">(Vernon Henderson, J.; Storeygard, A. and Weil, D 2012)</a>
+
+<p style="font-size:20px;color:white">
+	Other examples: <a  style="color:white;" href="http://dx.doi.org/10.1257/aer.102.2.994" style="font-size:20px;color:white" target="_blank">Henderson et al (2012)</a>, <a  style="color:white;" href="http://dx.doi.org/10.1093/qje/qjw003" target="_blank">Pinkovskiy & Sala-i-Martin (2016)</a>, <a  style="color:white;" href="http://dx.doi.org/10.1093/qje/qju004" target="_blank">Hodler & Raschky (2014)</a>, Michalopoulos & Papaioannou (<a style="color:white;" href="http://dx.doi.org/10.3982/ECTA9613" target="_blank">2013</a>, <a  style="color:white;" href="http://dx.doi.org/10.1093/qje/qjt029" target="_blank">2014</a>), <a  style="color:white;" href="http://dx.doi.org/10.1086/685300" target="_blank">Alesina et al (2016)</a>, among others.
+</p> 
+
+---
+<!-- .slide: data-background-color="#000000" -->
+
+### Elevation<!-- .element  style="color:#ffffff" -->
+
+(Free access,mts,30m)<!-- .element style="font-size:32px;color:#ffffff" -->
+
+![QGIS_1](inputs/lecture_4/elevation.jpg)<!-- .element style="border: none; background: none; box-shadow:none; width:800px; float: left;" -->
+
+<br><br><br>
+
+Source: [NASA (2016)](http://earthobservatory.nasa.gov/Features/ShuttleRetrospective/page6.php)<!-- .element target="_blank"  style="color:white;" -->
+
+<br> <br>
+<p style="font-size:20px;color:white">					
+	Example: <a  style="color:white;" href="http://www.mitpressjournals.org/doi/abs/10.1162/REST_a_00161" style="font-size:20px;color:white" target="_blank">  Nunn and Puga (2011)</a> <br> Terrain ruggedness $\rightarrow$ income per capita.
+</p> 
+
+---
+<!-- .slide: data-background-color="#000000" -->
+
+### Other sources<!-- .element  style="color:#ffffff" -->
+
+![QGIS_1](inputs/lecture_4/Donaldson_Table_Sources.png)<!-- .element style="border: none; background: none; box-shadow:none; width:600px; float: center;" -->
+
+<p style="font-size:16px;color:#ffffff"> <a href="http://pubs.aeaweb.org/doi/pdfplus/10.1257/jep.30.4.171" style="font-size:16px;color:#ffffff">(Donaldson and Storeygard, 2016)</a>.</p>
+
+---
+<!-- .slide: data-background-color="#000000" -->
+
+## [2] Mapas Históricos<!-- .element  style="color:#ffffff" -->
+
+<br>
+
+- Investigar Persistencia <!-- .element class="fragment" data-fragment-index="1" style="font-size:32px;color:#ffffff" -->
+- Evaluar viejas hipótesis <!-- .element class="fragment" data-fragment-index="2" style="font-size:32px;color:#ffffff" --> 
+
+
+---
+<!-- .slide: data-background-color="#000000" -->
+
+<center>
+<table>
+	<td>
+	<img src="inputs/lecture_1/Murdock_Initial.png" style="border: none; background: none; box-shadow:none; width:400px; float: center;">
+	</td>
+	<td>
+	<img src="inputs/lecture_1/page_Murdock.png" style="border: none; background: none; box-shadow:none; width:300px; float: center;">
+	</td>
+</table>
+</center>
+<br>
+<p style="font-size:20px;color:white">
+	Digitized by <a style="font-size:20px;color:white" href="http://dx.doi.org/10.1162/qjec.2008.123.1.139" target="_blank">Nunn (2008)</a>. He found a
+	negative relationship between the number of slaves exported from a country and current economic performance.
+</p>
+<p style="font-size:20px;color:white" class="fragment" data-fragment-index="1">
+	Then use by <a style="font-size:20px;color:white" href="http://dx.doi.org/10.1257/aer.101.7.3221" target="_blank">Nunn & Wantchekon (2011)</a>, Michalopoulos & Papaioannou (<a style="font-size:20px;color:white" href="http://dx.doi.org/10.3982/ECTA9613" target="_blank">2013</a>, <a style="font-size:20px;color:white" href="http://dx.doi.org/10.1093/qje/qjt029" target="_blank">2014</a>, <a style="font-size:20px;color:white" href="http://www.nber.org/papers/w17620" target="_blank">2015</a>), <a style="font-size:20px;color:white" href="http://dx.doi.org/10.1257/aer.20130604" target="_blank">Alsan (2015)</a>, <a href="http://dx.doi.org/10.1086/685300" target="_blank" style="font-size:20px;color:white">Alesina et al. (2016)</a>, etc.
+	<p>
+
+---
+<!-- .slide: data-background-color="#000000" -->
+
+### Pero, el pasado no siempre fue mejor..<!-- .element  style="color:#ffffff" -->
+
+![QGIS_1](inputs/lecture_5/maps_wrong.jpg)<!-- .element style="border: none; background: none; box-shadow:none; width:700px; float: center;" -->
+
+<small>Source:<!-- .element  style="color:#ffffff" -->[The Economists](https://www.1843magazine.com/culture/the-daily/mistaken-maps)<!-- .element  style="color:#ffffff" --> </small>
+
+
+---
+<!-- .slide: data-background-color="#000000" -->
+
+## [3] Fotografías areas<!-- .element  style="color:#ffffff" -->
+
+Warsarw Before, During and After WWII<!-- .element  style="color:#ffffff" -->
+
+![QGIS_1](inputs/lecture_5/aerial_warsarw.jpg)<!-- .element style="border: none; background: none; box-shadow:none; width:800px; float: center;" -->
+
+<small>Source:<!-- .element  style="color:#ffffff" --> [ The Economists](https://www.1843magazine.com/culture/the-daily/mistaken-maps)<!-- .element  style="color:#ffffff" --> </small>
+
+---
+<!-- .slide: data-background-color="#000000" -->
+
+### [4] Redes de transporte<!-- .element  style="color:#ffffff" -->
+
+
+![QGIS_1](inputs/roads.png)<!-- .element style="border: none; background: none; box-shadow:none; width:800px; float: center;" -->
+
+<!-- <iframe
+width="800"
+height="600"
+frameborder="0" style="border:0"
+src="https://www.google.com/maps/embed/v1/directions?key=AIzaSyA3-eJ9nu4e9wA_SmNSlO0fp4rabiXb0t4&origin=Universitat+de+Barcelona,+Gran+Via+de+les+Corts+Catalanes,+585,+08007+Barcelona&destination=Madrid+Spain&avoid=tolls|highways" allowfullscreen>
+</iframe> -->
+
+
+---
+<!-- .slide: data-background-color="#000000" -->
+
+### [5] Información Individual Georeferenciada<!-- .element  style="color:#ffffff" -->
+
+![QGIS_1](inputs/lecture_5/lsms_plot_1.jpg)<!-- .element style="border: none; background: none; box-shadow:none; width:400px; float: left;" -->
+
+![QGIS_1](inputs/lecture_5/lsms_plot_2.jpg)<!-- .element style="border: none; background: none; box-shadow:none; width:400px; float: right;" -->
+
+<br><br><br><br><br><br><br><br><br><br><br><br>
+<small><!-- .element  style="color:#ffffff" -->Source: World Bank - [LSMS-ISA](http://econ.worldbank.org/WBSITE/EXTERNAL/EXTDEC/EXTRESEARCH/EXTLSMS/0,,contentMDK:23512006~pagePK:64168445~piPK:64168309~theSitePK:3358997,00.html)<!-- .element  style="color:#ffffff" --> </small>
+
+---
+
+### Cómo SIG puede mejorar  muestra investigación en ciencias sociales?
+
+<!-- Part II -  -->
+
+===
+
+# GIS describes your data 
+
+---
+
+<iframe
+width="900"
+height="700"
+frameborder="0" style="border:0"
+src="/Users/juancarlosmunoz/Dropbox/Documents/Academics/Presentations/2017/Seminar_UB/inputs/maps/d3/crime-2011-aug.html" allowfullscreen>
+</iframe>
+
+
+===
+
+# GIS makes some research question feasible
+
+---
+
+### Combining satellite imagery and machine learning to predict poverty
+
+![QGIS_1](inputs/lecture_4/stanford_project_method.png)<!-- .element style="border: none; background: none; box-shadow:none; width:600px; float: center;" -->
+
+<p style="font-size:20px">
+[Neal Jean et al. (2016). Science (353):790-794](http://science.sciencemag.org/content/353/6301/790.full.pdf+html) </p>
+
+---
+
+#### Predicted vs observed consumption
+
+![QGIS_1](inputs/F3.large.jpg)<!-- .element style="border: none; background: none; box-shadow:none; width:500px; float: center;" -->
+
+<p style="font-size:20px">
+[Source: Neal Jean et al. (2016). Science (353):790-794](http://science.sciencemag.org/content/353/6301/790.full.pdf+html). <br> Other example: Hansen et al, 2016 (Deforestation) and Duque et al, 2017 (identifying slum)</p>
+
+
+---
+
+### Identifying illegal mining in Colombia and Peru (matching learning techniques)
+
+![QGIS_1](inputs/Saavedra_JMP.jpg)<!-- .element style="border: none; background: none; box-shadow:none; width:500px; float: center;" -->
+
+<p style="font-size:20px">
+Source: Saavedra and Romero (2017) </p>
+
+<p style="font-size:20px"> Identifying mining footprint by combining administrative data on legal mining and satellite pictures</p>
+
+---
+
+![QGIS_1](inputs/Saavedra_JMP_2.png)<!-- .element style="border: none; background: none; box-shadow:none; width:800px; float: center;" -->
+
+<p style="font-size:20px">Source: Saavedra and Romero (2017) </p>
+
+
+===
+
+# GIS could make your empirical strategy stronger
+
+---
+
+## By reducing the omitted-variable bias (I)
+<br><br><br><br>
+### Uncovering unobservables
+
+---
+
+<center>
+<table>
+<td>
+<img src="inputs/lecture_1/Gibbons_Machin_1.png" style="border: none; background: none; box-shadow:none; width:400px; float: center;">
+</td>
+<td>
+<img src="inputs/lecture_1/Gibbons_Machin_2.png" style="border: none; background: none; box-shadow:none; width:400px; float: center;">
+</td>
+</table>
+</center>
+<p style="font-size:20px">
+<a href="http://www.sciencedirect.com/science/article/pii/S0094119004001020" style="font-size:16px">Gibbons, S. and Machin, S (2005)</a>  transport $\rightarrow$ house prices
+</p>
+<p style="font-size:20px">
+Other nice examples are: (i) <a href="http://dx.doi.org/10.1257/aer.100.1.35" style="font-size:20px;" target="_blank">Conley & Udry (2010)</a> social learning in the diffusion Ghana </a>; (ii) <a href="https://www.aeaweb.org/articles?id=10.1257/aer.20140044" style="font-size:20px" target="_blank"> Acemoglu, D; Garcia-Jimeno, C. and Robinson (2014)</a> direct and spillover effects of local state capacity in Colombia</a>
+</p> 
+
+---
+
+exploring geography and location as an important dimension
+
+<center>
+<img src="inputs/lecture_1/Duranton_Overman.png" style="border: none; background: none; box-shadow:none; width:350px; float: center;">
+</center>
+
+<p style="font-size:20px">
+<a href="http://restud.oxfordjournals.org/content/72/4/1077.short" style="font-size:16px">(Duranton, D. and Overman, H 2005)</a> $\rightarrow$ location patterns of industries in UK
+</p>
+
+
+---
+
+## By reducing the omitted-variable bias (I)
+<br><br><br><br>
+### Building instruments
+
+---
+
+<center>
+<img src="inputs/lecture_1/Nun_2015.png" style="border: none; background: none; box-shadow:none; width:600px; float: center;">
+</center>
+<p style="font-size:20px">
+<a style="font-size:20px" href="http://dx.doi.org/10.1162/qjec.2008.123.1.139" target="_blank">Nunn (2008)</a>
+Current African Countries & Slave Trades
+</p> 
+<p style="font-size:20px">
+Instrument Slave Export &#8594; distances from each African country to the locations where slaves were demanded
+</p> 
+
+
+---
+
+## By offering new alternatives to measure your outcome variable
+<br><br><br><br>
+### Combining Remote-sensed images analysis
+
+---
+
+## Assessing housing quality (Kenia)
+
+<table border="0" cellpadding="0" cellspacing="0">
+<tr>
+	<td>July 2009</td>
+	<td>August 2012</td>
+</tr>
+<tr>
+<td>
+![QGIS_1](inputs/lecture_4/Marx_Stoker_Suri_1.jpg)<!-- .element style="border: none; background: none; box-shadow:none; width:450px; float: left;" -->
+</td>
+<td>
+![QGIS_1](inputs/lecture_4/Marx_Stoker_Suri_2.jpg)<!-- .element style="border: none; background: none; box-shadow:none; width:450px; float: right;" -->
+</td>
+</tr>
+</table>
+
+Luminosity reflected by metal roofs (investment)
+
+<p style="font-size:20px"> Source: 
+<a style="font-size:20px" href="http://www.mit.edu/%7Etavneet/Marx_Stoker_Suri.pdf" target="_blank">Marx et. al, (2017)</a></p> 
+
+---
+
+<small>Distribution of Household Tribes in Kibera</small>
+
+![QGIS_1](inputs/lecture_4/Marx_Stoker_Suri_3_sample.jpg)<!-- .element style="border: none; background: none; box-shadow:none; width:500px; float: center;" -->
+
+<small>Roofs from Satellite Images in Kibera (January 2011)</small>
+
+![QGIS_1](inputs/lecture_4/Marx_Stoker_Suri_4_Satellital.jpg)<!-- .element style="border: none; background: none; box-shadow:none; width:500px; float: center;" -->
+
+<p style="font-size:20px"> Source: 
+<a style="font-size:20px" href="http://www.mit.edu/%7Etavneet/Marx_Stoker_Suri.pdf" target="_blank">Marx et. al, (2017)</a></p> 
+
+
+
+===
+
+# GIS offers a rich toolbox for new identification strategies
+
+---
+
+## Spatial Regressions Discontinuity Design
+
+---
+
+- Using boundaries as cutoff
+	- $\rightarrow$ lines (set)
+- Indicator - Score - coordinates
+	- two-dimensions
+
+Further  [Keele & Titiunik 2014](http://dx.doi.org/10.1093/pan/mpu014)<!-- .element target="_blank" -->
+
+---
+
+Some applications in Economics
+<table>
+	<tr>
+	<td style="text-align: center;">
+[DELL (2010)](http://onlinelibrary.wiley.com/doi/10.3982/ECTA8121/abstract;jsessionid=A27078F65311ACF92F20C3ED3A69334A.f03t03?systemMessage=Wiley+Online+Library+will+be+unavailable+on+Saturday+26th+November+2016+from+07%3A00-11%3A00+GMT+%2F+02%3A00-06%3A00+EST+%2F+15%3A00-19%3A00+SGT+for+essential+maintenance.++Apologies+for+the+inconvenience.)<!-- .element target="_blank" --> </td>
+ <td style="text-align: center;"> [MICHALOPOULOS & PAPAIOANNOU (2014)](http://qje.oxfordjournals.org/content/129/1/151)<!-- .element target="_blank" --> </td>
+	</tr>
+	<tr>
+	<td style="text-align: center;">
+![QGIS_1](inputs/lecture_3/figure1.png)<!-- .element style="border: none; background: none; box-shadow:none; width:400px; float: center;" --> 
+</td>
+	<td style="text-align: center;">
+![QGIS_1](inputs/lecture_3/MP2014f3d.png)<!-- .element style="border: none; background: none; box-shadow:none; width:250px; float: center;" --> 
+</td>
+
+</tr>
+</table>
+
+---
+
+<img src="inputs/lecture_1/Dell(2010).png" style="border: none; background: none; box-shadow:none; width:550px; float: center;">
+<p style="font-size:20px">
+Colonial Institutions (Mita)  &#8594; current outcomes
+</p> 
+
+---
+
+## Exogenous unit of analysis
+
+---
+
+<center>
+<img src="inputs/lecture_1/all_maps_nightlight.png" style="border: none; background: none; box-shadow:none; width:600px; float: center;">
+</center>
+<p style="font-size:20px;">					
+<a style="font-size:20px;" href="http://conference.nber.org/confer/2016/SI2016/POL/Montalvo_Reynal-Querol.pdf" target="_blank">Montalvo and Reynal-Querol (2017)</a> </p>
+
+---
+
+Effect of Ethnic Fractionalization and Growth
+
+![QGIS_1](inputs/lecture_4/Montalvo_Reynal_2.png)<!-- .element style="border: none; background: none; box-shadow:none; width:800px; float: center;" -->
+<p style="font-size:20px;">					
+<a style="font-size:20px;" href="http://conference.nber.org/confer/2016/SI2016/POL/Montalvo_Reynal-Querol.pdf" target="_blank">Montalvo and Reynal-Querol (2017)</a> </p>
+
+---
+
+## Using historical events as main identification strategy
+
+---
+
+### Berlin Conference: Partitioned Africa Among Colonizers
+
+![QGIS_1](inputs/lecture_2/berlin-conference.jpg)
+
+---
+
+<img src="inputs/lecture_2/stelios_1.png" style="border: none; background: none; box-shadow:none; width:460px; float: center;">  <img src="inputs/lecture_2/stelios_2.png" style="border: none; background: none; box-shadow:none; width:460px; float: center;">
+
+<p style="font-size:20px;">
+<a style="font-size:20px;" href="http://qje.oxfordjournals.org/content/129/1/151.full" target="_blank">Source: Michalopoulos and Papaioannow (2014)</a> </p>
+
+---
+
+## Network Analysis
+
+---
+
+Drug-related homicides RD figures
+
+![QGIS_1](inputs/lecture_5/dell_3.png)<!-- .element style="border: none; background: none; box-shadow:none; width:700px; float: center;" -->
+
+<p style="font-size:20px;">
+<a style="font-size:20px;" href="https://www.aeaweb.org/articles?id=10.1257/aer.20121637" target="_blank">Source: Dell (2015)</a> </p>
+
+---
+
+Road network and Predicted Trafficking Routes
+
+![QGIS_1](inputs/lecture_5/dell_1.jpg)<!-- .element style="border: none; background: none; box-shadow:none; width:700px; float: center;" -->
+
+<p style="font-size:20px;">
+<a style="font-size:20px;" href="https://www.aeaweb.org/articles?id=10.1257/aer.20121637" target="_blank">Source: Dell (2015)</a> </p>
+
+---
+
+Identifying Spillovers Methodology
+
+![QGIS_1](inputs/lecture_5/dell_2.png)<!-- .element style="border: none; background: none; box-shadow:none; width:800px; float: center;" -->
+
+<p style="font-size:20px;">
+<a style="font-size:20px;" href="https://www.aeaweb.org/articles?id=10.1257/aer.20121637" target="_blank">Source: Dell (2015)</a> </p>
+
+===
+
+# Implementing GIS analysis in your research
+
+---
+
+<img src="inputs/lecture_1/ArcGISvsQGIS.png" style="border: none; background: none; box-shadow:none; width:500px; float: left;">
+<p class="fragment" data-fragment-index="1"
+>
+<h3>ArcGIS </h3>
+</p>
+<ul class="fragment" data-fragment-index="1" class="sub-menu" type="none">
+<li>
+	 Commercial Software 
+</li>
+<br>
+<li>
+	<i class="fa fa-thumbs-up" aria-hidden="true"></i> Pre-defined python package - ArcPy (+ Model Builder)
+</li>
+<br>
+<li>
+	<i class="fa fa-thumbs-down" aria-hidden="true"></i> Memory demanding; Windows only
+</li>
+</ul>
+
+<p class="fragment" data-fragment-index="2">
+<h3> <span class="fragment highlight-red">QGIS </span></h3>
+</p>
+<ul class="fragment" data-fragment-index="2" class="sub-menu" type="none">
+<li>
+	<i class="fa fa-thumbs-up" aria-hidden="true"></i> Open source software; easy to create map images; 
+</li>
+<li>
+	<i class="fa fa-thumbs-up" aria-hidden="true"></i> Pre-defined python package - PyQGIS
+</li>
+<li>
+	<i class="fa fa-thumbs-up" aria-hidden="true"></i>compatible with any OS (even android)
+</li>
+</ul>
+<p class="fragment" data-fragment-index="3">
+<a href="http://gisgeography.com/qgis-arcgis-differences/">More differences</a>
+</p>
+
+
+---
+
+## Standalone Solutions
+
+<img src="inputs/lecture_1/python_gis.jpg" style="border: none; background: none; box-shadow:none; width:400px; float: left;">
+<ul  class="sub-menu" >
+<li> Complete control of the underlying algorithms, data, and execution (no black box)</li>
+<br>
+<li> Integration with others python packages</li>
+<br>
+<li> Solution no-software depending (replication and collaborations)</li>
+<br>
+<li> GIS analysis beyond the bottoms </li>
+<br>
+<li> Integration with new high-performance environment (i.e. cluster,cloud) </li>
+</ul>
+
+---
+
+## Main challenge
+
+<center><img src="inputs/ibm-geospatial-data-790x545.png" style="border: none; background: none; box-shadow:none; width:600px; float: center;"></center>
+
+---
+
+## Advantages of being in Barcelona
+
+Marenostrum (129 in top 500 super-computers) [source: top 500 ](https://www.top500.org/lists/)
+
+<center><img src="inputs/marenostrum-supercomputer-3.jpg" style="border: none; background: none; box-shadow:none; width:600px; float: center;"></center>
+
+===
+
+# Thanks!
+<br>
+### presentation available at: https://jcmunozmora.github.io
+<br>
+juancarlos.munoz@upf.edu
+
+
+</script>
+</section>
+
+<!-- END SLIDES -->
+		</div>
+	</div>
+
+<!-- ...  ...  ...  ... ... ... ... ... .. .. ..-->
+<!-- ...  ...  ...  ... ... ... ... ... .. .. ..-->
+<!-- 				Scripts Options				-->
+<!-- ...  ...  ...  ... ... ... ... ... .. .. ..-->
+<!-- ...  ...  ...  ... ... ... ... ... .. .. ..-->
+
+
+	<!-- Basic Scripts Set Up -->
+	<script src="reveal.js/lib/js/head.min.js"></script>
+	<script src="reveal.js/js/reveal.js"></script>
+
+	<!-- Basic Scripts Set Up -->
+	<script>
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				// Display controls in the bottom right corner
+				controls: true,
+				// Display a presentation progress bar
+				progress: true,
+				// Push each slide change to the browser history
+				history: true,
+				center: true,
+				mouseWheel: true,
+				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'default', // none/fade/slide/convex/concave/zoom 
+			    //  Add annotation into the board
+			    chalkboard: { // font-awesome.min.css must be available
+					src: "chalkboard/chalkboard.json",
+					toggleChalkboardButton: { left: "80px" },
+					toggleNotesButton: { left: "130px" },
+    			},
+    			math: {
+					// mathjax: 'http://cdn.mathjax.org/mathjax/latest/MathJax.js',
+					config: 'TeX-AMS_HTML-full'
+				},
+				menu: { // Menu works best with font-awesome installed: sudo apt-get install fonts-font-awesome
+					themes: false,
+					transitions: false,
+					markers: true,
+					hideMissingTitles: true,
+					custom: [
+				            { title: 'Plugins', icon: '<i class="fa fa-external-link"></i>', src: 'toc.html' },
+				            { title: 'About', icon: '<i class="fa fa-info"></i>', src: 'about.html' }
+				        ]
+				},
+				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'default', // none/fade/slide/convex/concave/zoom
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: 'reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					// For Markdown Codes
+					{ src: 'reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'reveal.js/plugin/math/math.js', async: true },
+					{ src: 'reveal.js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'reveal.js/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },		
+					{ src: 'reveal.js-plugins/menu/menu.js' },
+					/*{ src: 'reveal.js-plugins/chalkboard/chalkboard.js' },*/
+				],
+				keyboard: {
+			        67: function() { RevealChalkboard.toggleNotesCanvas() },    // toggle notes canvas when 'c' is pressed
+			        66: function() { RevealChalkboard.toggleChalkboard() }, // toggle chalkboard when 'b' is pressed
+			        46: function() { RevealChalkboard.clear() },    // clear chalkboard when 'DEL' is pressed
+			         8: function() { RevealChalkboard.reset() },    // reset chalkboard data on current slide when 'BACKSPACE' is pressed
+			        68: function() { RevealChalkboard.download() }, // downlad recorded chalkboard drawing when 'd' is pressed
+    			},
+
+			});
+	</script>
+
+</body>
+</html>
